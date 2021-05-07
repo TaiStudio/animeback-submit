@@ -8,7 +8,7 @@ If you're not adding a new extensions, you can skip the following.
 
 ### Checklist
 
-- [ ] I have read and completed the checklist of [Submission Guide](https://github.com/electron/apps/blob/master/contributing.md#submission-guidelines)
+- [ ] I have read and completed the checklist of [Submission Guide](https://github.com/TaiStudio/animeback-submit/blob/master/contributing.md#submission-guidelines)
 - [ ] My extension is open-source and has been created for at least 20 days
 - [ ] My extension is closed-source and here is a proof it uses Animeback:
 
