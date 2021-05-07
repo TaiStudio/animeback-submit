@@ -39,16 +39,12 @@
     "url": "https://github.com/TaiStudio/animeback-submit/issues"
   },
   "homepage": "https://github.com/TaiStudio/animeback-submit#readme",
-  "dependencies": {
-    "json-stable-stringify": "^1.0.1",
-    "mime-types": "^2.1.30",
-    "rev-hash": "^3.0.0"
-  },
   "devDependencies": {
     "@octokit/rest": "^18.5.3",
     "bottleneck": "^1.16.0",
     "chai": "^4.3.4",
     "check-for-leaks": "^1.2.1",
+    "cheerio": "^0.22.0",
     "clean-deep": "^3.4.0",
     "color-convert": "^2.0.1",
     "count-array-values": "^1.2.1",
@@ -78,6 +74,11 @@
     "slugg": "^1.2.1",
     "tinycolor2": "^1.4.2",
     "url": "^0.11.0"
+  },
+  "dependencies": {
+    "json-stable-stringify": "^1.0.1",
+    "mime-types": "^2.1.30",
+    "rev-hash": "^3.0.0"
   },
   "engines": {
     "node": ">=8"
