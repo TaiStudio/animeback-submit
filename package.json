@@ -1,0 +1,26 @@
+{
+  "name": "animeback-submit",
+  "version": "1.0.0",
+  "description": "submission system for animeback extensions",
+  "main": "main.js",
+  "scripts": {
+    "wizard": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TaiStudio/animeback-submit.git"
+  },
+  "keywords": [
+    "tai",
+    "studio",
+    "animeback",
+    "extension",
+    "submission"
+  ],
+  "author": "Tai Studio <tai.studio@outlook.fr>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TaiStudio/animeback-submit/issues"
+  },
+  "homepage": "https://github.com/TaiStudio/animeback-submit#readme"
+}
