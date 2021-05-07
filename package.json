@@ -4,8 +4,14 @@
   "description": "submission system for animeback extensions",
   "main": "main.js",
   "scripts": {
+    "prepack": "check-for-leaks",
+    "prepush": "check-for-leaks",
     "wizard": "node wizard.js",
-    "test": ""
+    "test": "mocha --reporter min test/human-data.js test/colors-spec.js && prettier --check \"./**/*.{ts,js,yml}\" --write",
+    "test:debug": "mocha --reporter spec test/human-data.js test/colors-spec.js && prettier --check \"./**/*.{ts,js,yml}\" --write",
+    "pretest-all": "npm run build",
+    "prettier": "prettier --check \"./**/*.{ts,js,yml}\"",
+    "test-all": "mocha --reporter min && prettier --check \"./**/*.{ts,js,yml}\" --write"
   },
   "repository": {
     "type": "git",
@@ -23,5 +29,19 @@
   "bugs": {
     "url": "https://github.com/TaiStudio/animeback-submit/issues"
   },
-  "homepage": "https://github.com/TaiStudio/animeback-submit#readme"
+  "homepage": "https://github.com/TaiStudio/animeback-submit#readme",
+  "dependencies": {
+    "@octokit/rest": "^18.5.3",
+    "chai": "^4.3.4",
+    "check-for-leaks": "^1.2.1",
+    "dotenv-safe": "^8.2.0",
+    "fs": "0.0.1-security",
+    "jimp": "^0.16.1",
+    "mocha": "^8.4.0",
+    "os": "^0.1.1",
+    "path": "^0.12.7",
+    "prettier": "^2.2.1",
+    "sinon": "^10.0.0",
+    "tinycolor2": "^1.4.2"
+  }
 }
