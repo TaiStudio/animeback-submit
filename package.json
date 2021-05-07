@@ -15,12 +15,13 @@
     "build:pack": "node script/pack",
     "prepack": "check-for-leaks",
     "prepush": "check-for-leaks",
-    "wizard": "node wizard.js",
-    "test": "mocha --reporter min test/human-data.js test/colors-spec.js && prettier --check \"./**/*.{ts,js,yml}\" --write",
-    "test:debug": "mocha --reporter spec test/human-data.js test/colors-spec.js && prettier --check \"./**/*.{ts,js,yml}\" --write",
+    "prettier": "prettier --check \"./**/*.{ts,js,json}\"",
+    "test": "mocha --reporter min test/human-data.js test/colors-spec.js && prettier --check \"./**/*.{ts,js,json}\" --write",
+    "test:debug": "mocha --reporter spec test/human-data.js test/colors-spec.js && prettier --check \"./**/*.{ts,js,json}\" --write",
     "pretest-all": "npm run build",
-    "prettier": "prettier --check \"./**/*.{ts,js,yml}\"",
-    "test-all": "mocha --reporter min && prettier --check \"./**/*.{ts,js,yml}\" --write"
+    "test-all": "mocha --reporter min && prettier --check \"./**/*.{ts,js,json}\" --write",
+    "wizard": "node wizard.js",
+    "release": "script/release.sh"
   },
   "repository": {
     "type": "git",

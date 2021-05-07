@@ -3,13 +3,7 @@
     "faintColorOnWhite": "rgba(18, 15, 24, 0.1)",
     "goodColorOnBlack": "#2885A5",
     "goodColorOnWhite": "#120F18",
-    "palette": [
-      "#6e72b1",
-      "#fbfbfb",
-      "#120f18",
-      "#aec4d4",
-      "#2885a5"
-    ],
+    "palette": ["#6e72b1", "#fbfbfb", "#120f18", "#aec4d4", "#2885a5"],
     "source": {
       "path": "extensions\\weather\\weather-icon.png",
       "revHash": "de8978f63c"
