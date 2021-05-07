@@ -4,7 +4,8 @@
   "description": "submission system for animeback extensions",
   "main": "main.js",
   "scripts": {
-    "wizard": "node main.js"
+    "wizard": "node wizard.js",
+    "test": ""
   },
   "repository": {
     "type": "git",
