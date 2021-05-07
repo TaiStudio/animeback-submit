@@ -4,6 +4,15 @@
   "description": "submission system for animeback extensions",
   "main": "main.js",
   "scripts": {
+    "build": "npm-run-all build:*",
+    "build:clean": "node script/clean",
+    "build:resize": "node script/resize",
+    "build:dates": "node script/dates",
+    "build:colors": "node script/colors",
+    "build:categories": "node script/categories",
+    "build:releases": "node script/releases",
+    "build:readmes": "node script/readmes",
+    "build:pack": "node script/pack",
     "prepack": "check-for-leaks",
     "prepush": "check-for-leaks",
     "wizard": "node wizard.js",
@@ -31,34 +40,46 @@
   },
   "homepage": "https://github.com/TaiStudio/animeback-submit#readme",
   "dependencies": {
+    "json-stable-stringify": "^1.0.1",
+    "mime-types": "^2.1.30",
+    "rev-hash": "^3.0.0"
+  },
+  "devDependencies": {
     "@octokit/rest": "^18.5.3",
+    "bottleneck": "^1.16.0",
     "chai": "^4.3.4",
     "check-for-leaks": "^1.2.1",
     "clean-deep": "^3.4.0",
     "color-convert": "^2.0.1",
+    "count-array-values": "^1.2.1",
     "dotenv-safe": "^8.2.0",
     "fs": "0.0.1-security",
     "get-image-colors": "^4.0.0",
+    "github-url-to-object": "^4.0.6",
+    "human-interval": "^2.0.1",
     "image-size": "^1.0.0",
+    "imagemin": "^6.1.0",
     "inquirer": "^8.0.0",
+    "is-svg": "^4.2.2",
     "is-url": "^1.2.4",
     "jimp": "^0.16.1",
-    "json-stable-stringify": "^1.0.1",
     "make-color-accessible": "^1.2.0",
-    "mime-types": "^2.1.30",
     "mkdirp": "^0.5.5",
     "mocha": "^8.4.0",
+    "npm-run-all": "^4.1.5",
     "os": "^0.1.1",
     "path": "^0.12.7",
     "pick-a-good-color": "^1.1.1",
     "prettier": "^2.2.1",
-    "rev-hash": "^3.0.0",
+    "recursive-readdir-sync": "^1.0.6",
+    "rimraf": "^3.0.2",
+    "sharp": "^0.28.1",
     "sinon": "^10.0.0",
     "slugg": "^1.2.1",
     "tinycolor2": "^1.4.2",
     "url": "^0.11.0"
   },
-  "devDependencies": {
-    "is-svg": "^4.2.2"
+  "engines": {
+    "node": ">=8"
   }
 }
