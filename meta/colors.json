@@ -1,12 +1,12 @@
 {
   "weather": {
-    "faintColorOnWhite": "rgba(18, 15, 24, 0.1)",
-    "goodColorOnBlack": "#2885A5",
-    "goodColorOnWhite": "#120F18",
-    "palette": ["#6e72b1", "#fbfbfb", "#120f18", "#aec4d4", "#2885a5"],
+    "faintColorOnWhite": "rgba(158, 106, 16, 0.1)",
+    "goodColorOnBlack": "#F5D49C",
+    "goodColorOnWhite": "#9E6A10",
+    "palette": ["#e99f2f", "#fbf7f2", "#edb86e", "#f5d49c", "#eccca4"],
     "source": {
       "path": "extensions\\weather\\weather-icon.png",
-      "revHash": "de8978f63c"
+      "revHash": "10d2e1bd5a"
     }
   }
 }
