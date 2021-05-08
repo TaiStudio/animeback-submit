@@ -3,7 +3,7 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-git clone "https://animebot:$GH_TOKEN@github.com/TaiStudio/animeback-submit" app
+git clone "https://taistudio:$GH_TOKEN@github.com/TaiStudio/animeback-submit" app
 cd app
 npm ci
 
