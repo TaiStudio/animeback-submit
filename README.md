@@ -1,4 +1,4 @@
-# animeback-submit ![Continous Integration](https://github.com/TaiStudio/animeback-submit/workflows/Continous%20Integration/badge.svg?branch=master)
+# animeback-submit ![Continous Integration](https://github.com/TaiStudio/animeback-submit/actions/workflows/test.yml/badge.svg)
 
 A collection of extensions.
 
