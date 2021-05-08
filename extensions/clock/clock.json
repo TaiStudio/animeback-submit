@@ -1,0 +1,10 @@
+{
+  "name": "Clock",
+  "description": "Displays a clock.",
+  "author": "Tai Studio",
+  "version": "1.3.0",
+  "website": "https://tai-studio.ml",
+  "category": "News",
+  "keywords": ["tai", "studio", "clock", "display"],
+  "license": "MIT"
+}
