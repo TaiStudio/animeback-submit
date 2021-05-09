@@ -57,6 +57,7 @@ describe('machine-generated extension data (exported by the module)', () => {
 
   it('sets an `iconColors` array on every extension', () => {
     extensions.forEach((extension) => {
+      console.log(extension)
       expect(extension.iconColors).to.be.an('array', extension.slug)
       expect(extension.iconColors.length).to.be.above(2, extension.slug)
     })
