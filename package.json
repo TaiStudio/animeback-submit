@@ -1,5 +1,5 @@
 {
-  "name": "@taistudio/animeback-submit",
+  "name": "animeback-submit",
   "version": "1.0.0",
   "description": "submission system for animeback extensions",
   "main": "main.js",
