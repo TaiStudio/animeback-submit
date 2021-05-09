@@ -5,8 +5,8 @@ set -o errexit    # always exit on error
 set -o pipefail   # honor exit codes when piping
 set -o nounset    # fail on unset variables
 
-git clone "https://taistudio:$GH_TOKEN@github.com/TaiStudio/animeback-submit" app
-cd app
+git clone "https://taistudio:$GH_TOKEN@github.com/TaiStudio/animeback-submit" extension
+cd extension
 npm ci
 
 npm run test-all
