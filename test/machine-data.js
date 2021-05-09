@@ -100,7 +100,7 @@ describe('machine-generated extension data (exported by the module)', () => {
     })
 
     it('collects latest GitHub release data for extenisons that have it', () => {
-      expect(extensionsWithLatestRelease.length).to.be.above(50)
+      expect(extensionsWithLatestRelease.length).to.be.above(0)
     })
 
     it('sets `latestRelease` on extensions with GitHub repos that use Releases', () => {
@@ -120,7 +120,7 @@ describe('machine-generated extension data (exported by the module)', () => {
     const readmeextensions = extensions.filter((extension) => extension.readmeCleaned)
 
     it('collects READMEs for extensions with GitHub repos', () => {
-      expect(readmeextensions.length).to.be.above(50)
+      expect(readmeextensions.length).to.be.above(0)
     })
 
     it('sets `readmeCleaned`', () => {
