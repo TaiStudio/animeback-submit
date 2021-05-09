@@ -159,36 +159,36 @@ describe("machine-generated extension data (exported by the module)", () => {
     });
   });
 
-  it("rewrites relative image source tags", () => {
-    const beaker = extensions.find(
-      (extension) => extension.slug === "beaker-browser"
-    );
-    const local = '<img src="build/icons/256x256.png"';
-    const remote =
-      '<img src="https://github.com/beakerbrowser/beaker/raw/master/build/icons/256x256.png"';
+  // it("rewrites relative image source tags", () => {
+  //   const beaker = extensions.find(
+  //     (extension) => extension.slug === "beaker-browser"
+  //   );
+  //   const local = '<img src="build/icons/256x256.png"';
+  //   const remote =
+  //     '<img src="https://github.com/beakerbrowser/beaker/raw/master/build/icons/256x256.png"';
 
-    expect(beaker.readmeOriginal).to.include(local);
-    expect(beaker.readmeOriginal).to.not.include(remote);
+  //   expect(beaker.readmeOriginal).to.include(local);
+  //   expect(beaker.readmeOriginal).to.not.include(remote);
 
-    expect(beaker.readmeCleaned).to.not.include(local);
-    expect(beaker.readmeCleaned).to.include(remote);
-  });
+  //   expect(beaker.readmeCleaned).to.not.include(local);
+  //   expect(beaker.readmeCleaned).to.include(remote);
+  // });
 
-  it("rewrites relative link hrefs", () => {
-    const extension = extensions.find(
-      (extension) => extension.slug === "google-play-music-desktop-player"
-    );
-    const local = 'href="docs/PlaybackAPI.md"';
-    const remote =
-      'href="https://github.com/MarshallOfSound/Google-Play-Music-Desktop-Player-UNOFFICIAL-/blob/master/docs/PlaybackAPI.md"';
+//   it("rewrites relative link hrefs", () => {
+//     const extension = extensions.find(
+//       (extension) => extension.slug === "google-play-music-desktop-player"
+//     );
+//     const local = 'href="docs/PlaybackAPI.md"';
+//     const remote =
+//       'href="https://github.com/MarshallOfSound/Google-Play-Music-Desktop-Player-UNOFFICIAL-/blob/master/docs/PlaybackAPI.md"';
 
-    expect(extension.readmeOriginal).to.include(local);
-    expect(extension.readmeOriginal).to.not.include(remote);
+//     expect(extension.readmeOriginal).to.include(local);
+//     expect(extension.readmeOriginal).to.not.include(remote);
 
-    expect(extension.readmeCleaned).to.not.include(local);
-    expect(extension.readmeCleaned).to.include(remote);
-  });
-});
+//     expect(extension.readmeCleaned).to.not.include(local);
+//     expect(extension.readmeCleaned).to.include(remote);
+//   });
+// });
 
 describe("machine-generated category data (exported by the module)", () => {
   it("is an array", () => {
