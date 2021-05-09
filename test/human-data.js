@@ -57,7 +57,9 @@ describe("human-submitted extension data", () => {
           it("should not start with extension name", () => {
             const extensionName = extension.name.toLowerCase();
             const description = extension.description.toLowerCase();
-            expect(description).to.satisfy((desc) => !desc.startsWith(extensionName));
+            expect(description).to.satisfy(
+              (desc) => !desc.startsWith(extensionName)
+            );
           });
 
           const descIsGrandfathered = grandfatheredDescriptions.includes(slug);
@@ -68,7 +70,9 @@ describe("human-submitted extension data", () => {
             });
 
             it("should end with a period / full stop", () => {
-              expect(extension.description[extension.description.length - 1]).to.equal(
+              expect(
+                extension.description[extension.description.length - 1]
+              ).to.equal(
                 ".",
                 `Description should end in a period / full stop: '${extension.description}'`
               );
@@ -116,7 +120,9 @@ describe("human-submitted extension data", () => {
         });
 
         it("has a valid repository URL (or no repository)", () => {
-          expect(!extension.repository || isUrl(extension.repository)).to.equal(true);
+          expect(!extension.repository || isUrl(extension.repository)).to.equal(
+            true
+          );
         });
 
         describe("keywords", () => {

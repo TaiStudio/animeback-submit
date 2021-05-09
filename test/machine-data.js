@@ -174,20 +174,20 @@ describe("machine-generated extension data (exported by the module)", () => {
   //   expect(beaker.readmeCleaned).to.include(remote);
   // });
 
-//   it("rewrites relative link hrefs", () => {
-//     const extension = extensions.find(
-//       (extension) => extension.slug === "google-play-music-desktop-player"
-//     );
-//     const local = 'href="docs/PlaybackAPI.md"';
-//     const remote =
-//       'href="https://github.com/MarshallOfSound/Google-Play-Music-Desktop-Player-UNOFFICIAL-/blob/master/docs/PlaybackAPI.md"';
+  //   it("rewrites relative link hrefs", () => {
+  //     const extension = extensions.find(
+  //       (extension) => extension.slug === "google-play-music-desktop-player"
+  //     );
+  //     const local = 'href="docs/PlaybackAPI.md"';
+  //     const remote =
+  //       'href="https://github.com/MarshallOfSound/Google-Play-Music-Desktop-Player-UNOFFICIAL-/blob/master/docs/PlaybackAPI.md"';
 
-//     expect(extension.readmeOriginal).to.include(local);
-//     expect(extension.readmeOriginal).to.not.include(remote);
+  //     expect(extension.readmeOriginal).to.include(local);
+  //     expect(extension.readmeOriginal).to.not.include(remote);
 
-//     expect(extension.readmeCleaned).to.not.include(local);
-//     expect(extension.readmeCleaned).to.include(remote);
-//   });
+  //     expect(extension.readmeCleaned).to.not.include(local);
+  //     expect(extension.readmeCleaned).to.include(remote);
+  //   });
 });
 
 describe("machine-generated category data (exported by the module)", () => {

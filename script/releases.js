@@ -21,7 +21,9 @@ console.log(
   `${extensionsWithRepos.length} of ${extensions.length} extensions have a GitHub repo.`
 );
 console.log(
-  `${extensionsWithRepos.filter(shouldUpdateextensionReleaseData).length} of those ${
+  `${
+    extensionsWithRepos.filter(shouldUpdateextensionReleaseData).length
+  } of those ${
     extensionsWithRepos.length
   } have missing or outdated release data.`
 );
