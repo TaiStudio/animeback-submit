@@ -3,7 +3,7 @@ const path = require("path");
 const datesPath = path.join(__dirname, "../meta/dates.json");
 const dates = require(datesPath);
 const existingSlugs = Object.keys(dates);
-const apps = require("../lib/raw-app-list")();
+const apps = require("../lib/raw-extensions-list")();
 
 console.log("Checking app submission dates...");
 

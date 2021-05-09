@@ -1,4 +1,4 @@
-const categories = require("./lib/app-categories");
+const categories = require("./lib/extensions-categories");
 const inquirer = require("inquirer");
 const isUrl = require("is-url");
 const path = require("path");

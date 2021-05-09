@@ -1,4 +1,4 @@
-const categories = require('../lib/app-categories')
+const categories = require('../lib/extensions-categories')
 const fs = require('fs')
 const path = require('path')
 const slugs = fs

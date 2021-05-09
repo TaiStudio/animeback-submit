@@ -1,4 +1,4 @@
-const categories = require("../lib/app-categories");
+const categories = require("../lib/extensions-categories");
 const mocha = require("mocha");
 const describe = mocha.describe;
 const it = mocha.it;

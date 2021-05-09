@@ -14,11 +14,11 @@ const oldReleaseData = require(outputFile);
 const output = {};
 const limiter = new Bottleneck(MAX_CONCURRENCY);
 
-const apps = require("../lib/raw-app-list")();
-const appsWithRepos = require("../lib/apps-with-github-repos");
+const apps = require("../lib/raw-extensions-list")();
+const appsWithRepos = require("../lib/extensions-with-github-repos");
 
 console.log(
-  `${appsWithRepos.length} of ${apps.length} apps have a GitHub repo.`
+  `${appsWithRepos.length} of ${apps.length} extensions have a GitHub repo.`
 );
 console.log(
   `${appsWithRepos.filter(shouldUpdateAppReleaseData).length} of those ${

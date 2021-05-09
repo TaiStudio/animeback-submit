@@ -1,7 +1,7 @@
 "use strict";
 
 const path = require("path");
-const slugsAndIconPaths = require("../lib/raw-app-list")();
+const slugsAndIconPaths = require("../lib/raw-extensions-list")();
 const updateComplimentaryColorsFile = require("../lib/colors");
 
 const root = path.normalize(path.join(__dirname, ".."));

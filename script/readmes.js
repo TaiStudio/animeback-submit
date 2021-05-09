@@ -15,8 +15,8 @@ const oldReadmeData = require(outputFile);
 const output = {};
 const limiter = new Bottleneck(MAX_CONCURRENCY);
 
-const apps = require("../lib/raw-app-list")();
-const appsWithRepos = require("../lib/apps-with-github-repos");
+const apps = require("../lib/raw-extensions-list")();
+const appsWithRepos = require("../lib/extensions-with-github-repos");
 const appsToUpdate = appsWithRepos.filter((app) => {
   const oldData = oldReadmeData[app.slug];
   if (!oldData) return true;
