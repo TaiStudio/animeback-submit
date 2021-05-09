@@ -188,7 +188,7 @@ describe("machine-generated extension data (exported by the module)", () => {
 //     expect(extension.readmeCleaned).to.not.include(local);
 //     expect(extension.readmeCleaned).to.include(remote);
 //   });
-// });
+});
 
 describe("machine-generated category data (exported by the module)", () => {
   it("is an array", () => {
