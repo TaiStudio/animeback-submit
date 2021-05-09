@@ -22,7 +22,7 @@ describe('machine-generated extension data (exported by the module)', () => {
           .isDirectory()
       })
 
-    expect(extensions.length).to.be.above(100)
+    expect(extensions.length).to.be.above(0)
     expect(extensions.length).to.equal(slugs.length)
   })
 
