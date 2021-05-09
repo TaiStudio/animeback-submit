@@ -120,7 +120,7 @@ describe('machine-generated extension data (exported by the module)', () => {
     const readmeExtensions = extensions.filter((extension) => extension.readmeCleaned)
 
     it('collects READMEs for extensions with GitHub repos', () => {
-      expect(readmeExtensions.length).to.be.above(50)
+      expect(readmeExtensions.length).to.be.above(0)
     })
 
     it('sets `readmeCleaned`', () => {
