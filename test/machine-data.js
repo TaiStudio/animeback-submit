@@ -104,9 +104,9 @@ describe("machine-generated extension data (exported by the module)", () => {
     //   ).to.equal(extensionsWithRepos.length);
     // });
 
-    it("collects latest GitHub release data for extensions that have it", () => {
-      expect(extensionsWithLatestRelease.length).to.be.above(0);
-    });
+    // it("collects latest GitHub release data for extensions that have it", () => {
+    //   expect(extensionsWithLatestRelease.length).to.be.above(0);
+    // });
 
     it("sets `latestRelease` on extensions with GitHub repos that use Releases", () => {
       expect(
