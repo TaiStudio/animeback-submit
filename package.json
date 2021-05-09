@@ -63,6 +63,7 @@
     "is-svg": "^4.2.2",
     "is-url": "^1.2.4",
     "jimp": "^0.16.1",
+    "jpeg-js": ">=0.4.0",
     "lint-staged": "^10.0.9",
     "make-color-accessible": "^1.2.0",
     "mkdirp": "^0.5.5",
