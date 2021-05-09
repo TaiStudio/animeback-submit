@@ -99,7 +99,7 @@ describe('machine-generated extension data (exported by the module)', () => {
       )
     })
 
-    it('collects latest GitHub release data for extenisons that have it', () => {
+    it('collects latest GitHub release data for extensions that have it', () => {
       expect(extensionsWithLatestRelease.length).to.be.above(0)
     })
 
@@ -117,26 +117,26 @@ describe('machine-generated extension data (exported by the module)', () => {
   })
 
   describe('readmes', () => {
-    const readmeextensions = extensions.filter((extension) => extension.readmeCleaned)
+    const readmeExtensions = extensions.filter((extension) => extension.readmeCleaned)
 
     it('collects READMEs for extensions with GitHub repos', () => {
-      expect(readmeextensions.length).to.be.above(0)
+      expect(readmeExtensions.length).to.be.above(50)
     })
 
     it('sets `readmeCleaned`', () => {
-      expect(readmeextensions.every((extension) => extension.readmeCleaned.length > 0)).to.eq(
+      expect(readmeExtensions.every((extension) => extension.readmeCleaned.length > 0)).to.eq(
         true
       )
     })
 
     it('sets `readmeOriginal`', () => {
-      expect(readmeextensions.every((extension) => extension.readmeOriginal.length > 0)).to.eq(
+      expect(readmeExtensions.every((extension) => extension.readmeOriginal.length > 0)).to.eq(
         true
       )
     })
 
     it('sets `readmeFetchedAt`', () => {
-      expect(readmeextensions.every((extension) => extension.readmeFetchedAt.length > 0)).to.eq(
+      expect(readmeExtensions.every((extension) => extension.readmeFetchedAt.length > 0)).to.eq(
         true
       )
     })
