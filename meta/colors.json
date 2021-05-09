@@ -1,12 +1,18 @@
 {
-  "weather": {
-    "faintColorOnWhite": "rgba(158, 106, 16, 0.1)",
-    "goodColorOnBlack": "#F5D49C",
-    "goodColorOnWhite": "#9E6A10",
-    "palette": ["#e99f2f", "#fbf7f2", "#edb86e", "#f5d49c", "#eccca4"],
+  "hyper": {
+    "faintColorOnWhite": "rgba(71, 23, 57, 0.1)",
+    "goodColorOnBlack": "#EF7463",
+    "goodColorOnWhite": "#471739",
+    "palette": [
+      "#ef7463",
+      "#040404",
+      "#471739",
+      "#6c6c6c",
+      "#7c7c7c"
+    ],
     "source": {
-      "path": "extensions\\weather\\weather-icon.png",
-      "revHash": "10d2e1bd5a"
+      "path": "extensions/hyper/hyper-icon.png",
+      "revHash": "8a570145f2"
     }
   }
 }
