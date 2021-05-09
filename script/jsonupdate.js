@@ -88,18 +88,18 @@ const keywordMappings = {
 const keywordCounts = {};
 const usedCategories = {};
 
-function determineCategory(app, jsonPath) {
+function determineCategory(extension, jsonPath) {
   let guessingKeywords = false;
   let updatejson = false;
   let matched = false;
   let matchedKeyword;
 
-  if (!app.keywords) {
-    app.keywords = app.description.split(" ");
+  if (!extension.keywords) {
+    extension.keywords = extension.description.split(" ");
     guessingKeywords = true;
   }
 
-  app.keywords.some((keyword, index) => {
+  extension.keywords.some((keyword, index) => {
     matched = categories.find((category) => {
       if (keyword.toLowerCase() === category.toLowerCase()) {
         matchedKeyword = keyword;
@@ -110,7 +110,7 @@ function determineCategory(app, jsonPath) {
   });
   if (!matched) {
     // look in mappings
-    app.keywords.some((keyword, index) => {
+    extension.keywords.some((keyword, index) => {
       let lowerKeyword = keyword.toLowerCase();
       if (keywordMappings[lowerKeyword]) {
         matched = keywordMappings[lowerKeyword];
@@ -123,7 +123,7 @@ function determineCategory(app, jsonPath) {
   }
 
   if (matched) {
-    app.category = matched;
+    extension.category = matched;
     updatejson = true;
     if (!usedCategories[matched]) {
       usedCategories[matched] = 1;
@@ -132,7 +132,7 @@ function determineCategory(app, jsonPath) {
     }
   }
   if (!updatejson) {
-    app.keywords.forEach((keyword) => {
+    extension.keywords.forEach((keyword) => {
       let lowerKeyword = keyword.toLowerCase();
       if (keywordCounts[lowerKeyword]) {
         keywordCounts[lowerKeyword]++;
@@ -144,35 +144,35 @@ function determineCategory(app, jsonPath) {
 
   if (updatejson) {
     if (guessingKeywords) {
-      app.keywords = [matchedKeyword];
+      extension.keywords = [matchedKeyword];
       console.log(
-        `SUCCESS ${app.name} has been given ${app.category} by guessing keyword: ${matchedKeyword}`
+        `SUCCESS ${extension.name} has been given ${extension.category} by guessing keyword: ${matchedKeyword}`
       );
     } else {
       console.log(
-        `SUCCESS ${app.name} has been given ${app.category} by using keyword: ${matchedKeyword}`
+        `SUCCESS ${extension.name} has been given ${extension.category} by using keyword: ${matchedKeyword}`
       );
     }
-    savejson(app, jsonPath);
+    savejson(extension, jsonPath);
   } else {
     if (guessingKeywords) {
       console.log(
-        `${app.name} does not have keywords, its description is: ${app.description}.`
+        `${extension.name} does not have keywords, its description is: ${extension.description}.`
       );
     } else {
       console.log(
         `Could not find category for ${
-          app.name
-        }, keywords are: ${app.keywords.join(",")}, description is: ${
-          app.description
+          extension.name
+        }, keywords are: ${extension.keywords.join(",")}, description is: ${
+          extension.description
         }`
       );
     }
   }
 }
 
-function savejson(app, jsonPath) {
-  const jsonContent = json.stringify(app, 2);
+function savejson(extension, jsonPath) {
+  const jsonContent = json.stringify(extension, 2);
   fs.writeFileSync(jsonPath, jsonContent);
 }
 
@@ -180,17 +180,17 @@ slugs.forEach((slug) => {
   const basedir = path.join(__dirname, `../extensions/${slug}`);
   const jsonFile = `${slug}.json`;
   const jsonPath = path.join(basedir, jsonFile);
-  let app;
+  let extension;
   let data;
 
   try {
     data = fs.readFileSync(jsonPath, { encoding: "utf-8" });
-    app = json.parse(data);
+    extension = json.parse(data);
   } catch (err) {
     console.log(`Error loading ${jsonPath}`, err);
   }
-  if (!app.category) {
-    determineCategory(app, jsonPath);
+  if (!extension.category) {
+    determineCategory(extension, jsonPath);
   }
 });
 

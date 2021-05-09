@@ -61,7 +61,7 @@ const questions = [
   {
     type: "list",
     name: "category",
-    message: "App category",
+    message: "Extension category",
     choices: categories,
     validate: function (value) {
       if (!value) return "Please select a category";
@@ -90,12 +90,12 @@ const questions = [
 inquirer
   .prompt(questions)
   .then(function (answers) {
-    const app = cleanDeep(answers);
-    const slug = slugify(app.name);
+    const extension = cleanDeep(answers);
+    const slug = slugify(extension.name);
     const basepath = path.join(__dirname, `extensions/${slug}`);
     const jsonPath = path.join(basepath, `${slug}.json`);
     mkdirp(basepath);
-    fs.writeFileSync(jsonPath, `${JSON.stringify(app)} \r\n`);
+    fs.writeFileSync(jsonPath, `${JSON.stringify(extension)} \r\n`);
     console.log();
     console.log(`Yay! Created ${path.relative(process.cwd(), jsonPath)}`);
     console.log(`Now you just need to add an icon named ${slug}-icon.png\n`);

@@ -5,7 +5,7 @@ const colors = require("../meta/colors.json");
 const releases = require("../meta/releases.json");
 const readmes = require("../meta/readmes.json");
 const parseGitHubUrl = require("github-url-to-object");
-const apps = [];
+const extensions = [];
 
 fs.readdirSync(path.join(__dirname, "../extensions"))
   .filter((filename) => {
@@ -15,7 +15,7 @@ fs.readdirSync(path.join(__dirname, "../extensions"))
   })
   .forEach((slug) => {
     const jsonFile = path.join(__dirname, `../extensions/${slug}/${slug}.json`);
-    const app = Object.assign(
+    const extension = Object.assign(
       { slug: slug },
       fs.readFileSync(jsonFile),
       {
@@ -31,28 +31,28 @@ fs.readdirSync(path.join(__dirname, "../extensions"))
       readmes[slug]
     );
 
-    app.goodColorOnWhite =
-      app.goodColorOnWhite || colors[slug].goodColorOnWhite;
-    app.goodColorOnBlack =
-      app.goodColorOnBlack || colors[slug].goodColorOnBlack;
-    app.faintColorOnWhite =
-      app.faintColorOnWhite || colors[slug].faintColorOnWhite;
+    extension.goodColorOnWhite =
+      extension.goodColorOnWhite || colors[slug].goodColorOnWhite;
+    extension.goodColorOnBlack =
+      extension.goodColorOnBlack || colors[slug].goodColorOnBlack;
+    extension.faintColorOnWhite =
+      extension.faintColorOnWhite || colors[slug].faintColorOnWhite;
 
     // Delete website if it's the same URL as repository
-    const parsedWebsite = parseGitHubUrl(app.website);
-    const parsedRepo = parseGitHubUrl(app.repository);
+    const parsedWebsite = parseGitHubUrl(extension.website);
+    const parsedRepo = parseGitHubUrl(extension.repository);
     if (
       parsedWebsite &&
       parsedRepo &&
       parsedWebsite.https_url === parsedRepo.https_url
     ) {
-      delete app.website;
+      delete extension.website;
     }
 
-    apps.push(app);
+    extensions.push(extension);
   });
 
 fs.writeFileSync(
   path.join(__dirname, "../index.json"),
-  JSON.stringify(apps, null, 2)
+  JSON.stringify(extensions, null, 2)
 );

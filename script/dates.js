@@ -3,16 +3,16 @@ const path = require("path");
 const datesPath = path.join(__dirname, "../meta/dates.json");
 const dates = require(datesPath);
 const existingSlugs = Object.keys(dates);
-const apps = require("../lib/raw-extensions-list")();
+const extensions = require("../lib/raw-extensions-list")();
 
 console.log("Checking app submission dates...");
 
-apps
-  .filter((app) => existingSlugs.indexOf(app.slug) === -1)
-  .forEach((app) => {
+extensions
+  .filter((extension) => existingSlugs.indexOf(extension.slug) === -1)
+  .forEach((extension) => {
     const date = new Date().toISOString().slice(0, 10);
-    console.log(`${app.slug}: ${date}`);
-    dates[app.slug] = date;
+    console.log(`${extension.slug}: ${date}`);
+    dates[extension.slug] = date;
   });
 
 fs.writeFileSync(datesPath, JSON.stringify(dates, null, 2));

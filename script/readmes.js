@@ -15,24 +15,24 @@ const oldReadmeData = require(outputFile);
 const output = {};
 const limiter = new Bottleneck(MAX_CONCURRENCY);
 
-const apps = require("../lib/raw-extensions-list")();
-const appsWithRepos = require("../lib/extensions-with-github-repos");
-const appsToUpdate = appsWithRepos.filter((app) => {
-  const oldData = oldReadmeData[app.slug];
+const extensions = require("../lib/raw-extensions-list")();
+const extensionsWithRepos = require("../lib/extensions-with-github-repos");
+const extensionsToUpdate = extensionsWithRepos.filter((extension) => {
+  const oldData = oldReadmeData[extension.slug];
   if (!oldData) return true;
   const oldDate = new Date(oldData.readmeFetchedAt || null).getTime();
   return oldDate + README_CACHE_TTL < Date.now();
 });
 
 console.log(
-  `${appsWithRepos.length} of ${apps.length} extenions have a GitHub repo.`
+  `${extensionsWithRepos.length} of ${extensions.length} extensions have a GitHub repo.`
 );
 console.log(
-  `${appsToUpdate.length} of those ${appsWithRepos.length} have missing or outdated README data.`
+  `${extensionsToUpdate.length} of those ${extensionsWithRepos.length} have missing or outdated README data.`
 );
 
-appsToUpdate.forEach((app) => {
-  limiter.schedule(getReadme, app);
+extensionsToUpdate.forEach((extension) => {
+  limiter.schedule(getReadme, extension);
 });
 
 limiter.on("idle", () => {
@@ -41,8 +41,8 @@ limiter.on("idle", () => {
   process.exit();
 });
 
-function getReadme(app) {
-  const { user: owner, repo } = parseGitUrl(app.repository);
+function getReadme(extension) {
+  const { user: owner, repo } = parseGitUrl(extension.repository);
   const opts = {
     owner: owner,
     repo: repo,
@@ -58,7 +58,7 @@ function getReadme(app) {
     })
     .catch((err) => {
       if (err.status !== 404) {
-        console.error(`${app.slug}: Non 404 error`);
+        console.error(`${extension.slug}: Non 404 error`);
         console.error(err);
       }
 
@@ -68,39 +68,39 @@ function getReadme(app) {
       github.repos
         .getReadme(opts)
         .then((release) => {
-          console.log(`${app.slug}: got latest README`);
-          output[app.slug] = {
-            readmeCleaned: cleanReadme(release.data, defaultBranch, app),
+          console.log(`${extension.slug}: got latest README`);
+          output[extension.slug] = {
+            readmeCleaned: cleanReadme(release.data, defaultBranch, extension),
             readmeOriginal: release.data,
             readmeFetchedAt: new Date(),
           };
         })
         .catch((err) => {
-          console.error(`${app.slug}: no README found`);
-          output[app.slug] = {
+          console.error(`${extension.slug}: no README found`);
+          output[extension.slug] = {
             readmeOriginal: null,
             readmeFetchedAt: new Date(),
           };
           if (err.status !== 404) {
-            console.error(`${app.slug}: Non 404 error`);
+            console.error(`${extension.slug}: Non 404 error`);
             console.error(err);
           }
         });
     });
 }
 
-function cleanReadme(readme, defaultBranch, app) {
+function cleanReadme(readme, defaultBranch, extension) {
   const $ = cheerio.load(readme);
 
   const $relativeImages = $("img").not('[src^="http"]');
   if ($relativeImages.length) {
     console.log(
-      `${app.slug}: updating ${$relativeImages.length} relative image URLs`
+      `${extension.slug}: updating ${$relativeImages.length} relative image URLs`
     );
     $relativeImages.each((i, img) => {
       $(img).attr(
         "src",
-        `${app.repository}/raw/${defaultBranch}/${$(img).attr("src")}`
+        `${extension.repository}/raw/${defaultBranch}/${$(img).attr("src")}`
       );
     });
   }
@@ -108,12 +108,12 @@ function cleanReadme(readme, defaultBranch, app) {
   const $relativeLinks = $("a").not('[href^="http"]');
   if ($relativeLinks.length) {
     console.log(
-      `${app.slug}: updating ${$relativeLinks.length} relative links`
+      `${extension.slug}: updating ${$relativeLinks.length} relative links`
     );
     $relativeLinks.each((i, link) => {
       $(link).attr(
         "href",
-        `${app.repository}/blob/${defaultBranch}/${$(link).attr("href")}`
+        `${extension.repository}/blob/${defaultBranch}/${$(link).attr("href")}`
       );
     });
   }

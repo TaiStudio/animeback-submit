@@ -20,7 +20,7 @@ fs.readdirSync(path.join(__dirname, "../extensions"))
     );
   })
   .forEach((filename) => {
-    const appDir = path.join(__dirname, `../extensions/${filename}`);
-    console.log(`Removing leftover artifacts from ${appDir}`);
-    rimraf(appDir);
+    const extensionDir = path.join(__dirname, `../extensions/${filename}`);
+    console.log(`Removing leftover artifacts from ${extensionDir}`);
+    rimraf(extensionDir);
   });

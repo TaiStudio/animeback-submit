@@ -43,45 +43,45 @@ describe("human-submitted extension data", () => {
       });
 
       describe(`${jsonFile}`, () => {
-        const app = require(jsonPath);
+        const extension = require(jsonPath);
 
         it("has a name", () => {
-          expect(app.name.length).to.be.above(0);
+          expect(extension.name.length).to.be.above(0);
         });
 
         describe("description", () => {
           it("exists", () => {
-            expect(app.description.length).to.be.above(0);
+            expect(extension.description.length).to.be.above(0);
           });
 
           it("should not start with extension name", () => {
-            const appName = app.name.toLowerCase();
-            const description = app.description.toLowerCase();
-            expect(description).to.satisfy((desc) => !desc.startsWith(appName));
+            const extensionName = extension.name.toLowerCase();
+            const description = extension.description.toLowerCase();
+            expect(description).to.satisfy((desc) => !desc.startsWith(extensionName));
           });
 
           const descIsGrandfathered = grandfatheredDescriptions.includes(slug);
           if (!descIsGrandfathered) {
             it("should start with a capital letter", () => {
-              const firstLetter = app.description[0];
+              const firstLetter = extension.description[0];
               expect(firstLetter).to.equal(firstLetter.toUpperCase());
             });
 
             it("should end with a period / full stop", () => {
-              expect(app.description[app.description.length - 1]).to.equal(
+              expect(extension.description[extension.description.length - 1]).to.equal(
                 ".",
-                `Description should end in a period / full stop: '${app.description}'`
+                `Description should end in a period / full stop: '${extension.description}'`
               );
             });
 
             it('should not start description with "A" or "An"', () => {
-              const descriptionFirstWord = app.description
+              const descriptionFirstWord = extension.description
                 .toLowerCase()
                 .split(" ", 1)[0];
               const badStarts = ["a", "an"];
               expect(badStarts).to.not.include(
                 descriptionFirstWord,
-                `Description should not start with 'A' or 'An': '${app.description}'`
+                `Description should not start with 'A' or 'An': '${extension.description}'`
               );
             });
           }
@@ -103,7 +103,7 @@ describe("human-submitted extension data", () => {
 
           it("should use ssl links", () => {
             const goodProtocols = ["https:", "sftp:"];
-            const urls = getObjectUrls(app);
+            const urls = getObjectUrls(extension);
 
             urls.forEach((url) =>
               expect(url.protocol, url).to.be.oneOf(goodProtocols)
@@ -112,20 +112,20 @@ describe("human-submitted extension data", () => {
         }
 
         it("has a website with a valid URL (or no website)", () => {
-          expect(!app.website || isUrl(app.website)).to.equal(true);
+          expect(!extension.website || isUrl(extension.website)).to.equal(true);
         });
 
         it("has a valid repository URL (or no repository)", () => {
-          expect(!app.repository || isUrl(app.repository)).to.equal(true);
+          expect(!extension.repository || isUrl(extension.repository)).to.equal(true);
         });
 
         describe("keywords", () => {
           it("should, if present, be an array of keywords", () => {
-            expect(app.keywords || []).to.be.an("array");
+            expect(extension.keywords || []).to.be.an("array");
           });
 
           it("should not include duplicates", () => {
-            const keywords = app.keywords || [];
+            const keywords = extension.keywords || [];
             expect(keywords.sort().toString()).to.equal(
               [...new Set(keywords).values()].sort().toString()
             );
@@ -133,14 +133,14 @@ describe("human-submitted extension data", () => {
         });
 
         it("has a valid category", () => {
-          expect(app.category.length).to.be.above(0);
-          expect(app.category).to.be.oneOf(categories);
+          expect(extension.category.length).to.be.above(0);
+          expect(extension.category).to.be.oneOf(categories);
         });
 
         describe("colors", () => {
           it(`allows goodColorOnWhite to be set, but it must be accessible`, () => {
             // accessible: contrast ratio of 4.5:1 or greater (white background)
-            const color = app.goodColorOnWhite;
+            const color = extension.goodColorOnWhite;
             if (color) {
               const accessibleColor = makeColorAccessible(color);
               expect(color === accessibleColor).to.equal(
@@ -152,7 +152,7 @@ describe("human-submitted extension data", () => {
 
           it(`allows goodColorOnBlack to be set, but it must be accessible`, () => {
             // accessible: contrast ratio of 4.5:1 or greater (black background)
-            const color = app.goodColorOnBlack;
+            const color = extension.goodColorOnBlack;
             if (color) {
               const accessibleColor = makeColorAccessible(color, {
                 background: "black",
@@ -165,7 +165,7 @@ describe("human-submitted extension data", () => {
           });
 
           it(`allows faintColorOnWhite to be set`, () => {
-            const color = app.faintColorOnWhite;
+            const color = extension.faintColorOnWhite;
             if (color) {
               expect(color).to.match(
                 /rgba\(\d+, \d+, \d+, /,
@@ -176,11 +176,11 @@ describe("human-submitted extension data", () => {
         });
 
         it("has no empty properties", () => {
-          expect(cleanDeep(app)).to.deep.equal(app);
+          expect(cleanDeep(extension)).to.deep.equal(extension);
         });
 
         describe("screenshots", () => {
-          const screenshots = app.screenshots || [];
+          const screenshots = extension.screenshots || [];
 
           it("requires imageUrl to be a fully-qualified HTTPS URL", () => {
             screenshots.forEach((screenshot) => {
@@ -188,7 +188,7 @@ describe("human-submitted extension data", () => {
                 isUrl(screenshot.imageUrl) && /^https/.test(screenshot.imageUrl)
               ).to.equal(
                 true,
-                `${app.slug} screenshot imageUrl must be a fully-qualified HTTPS URL`
+                `${extension.slug} screenshot imageUrl must be a fully-qualified HTTPS URL`
               );
             });
           });
@@ -197,7 +197,7 @@ describe("human-submitted extension data", () => {
             screenshots.forEach((screenshot) => {
               expect(!screenshot.linkUrl || isUrl(screenshot.linkUrl)).to.equal(
                 true,
-                `${app.slug} screenshot linkURL must be a fully qualified URL`
+                `${extension.slug} screenshot linkURL must be a fully qualified URL`
               );
             });
           });
@@ -205,7 +205,7 @@ describe("human-submitted extension data", () => {
 
         it("has a valid YouTube URL (or none)", () => {
           expect(
-            !app.youtube_video_url || isUrl(app.youtube_video_url)
+            !extension.youtube_video_url || isUrl(extension.youtube_video_url)
           ).to.equal(true);
         });
       });

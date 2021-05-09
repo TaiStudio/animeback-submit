@@ -14,23 +14,23 @@ const oldReleaseData = require(outputFile);
 const output = {};
 const limiter = new Bottleneck(MAX_CONCURRENCY);
 
-const apps = require("../lib/raw-extensions-list")();
-const appsWithRepos = require("../lib/extensions-with-github-repos");
+const extensions = require("../lib/raw-extensions-list")();
+const extensionsWithRepos = require("../lib/extensions-with-github-repos");
 
 console.log(
-  `${appsWithRepos.length} of ${apps.length} extensions have a GitHub repo.`
+  `${extensionsWithRepos.length} of ${extensions.length} extensions have a GitHub repo.`
 );
 console.log(
-  `${appsWithRepos.filter(shouldUpdateAppReleaseData).length} of those ${
-    appsWithRepos.length
+  `${extensionsWithRepos.filter(shouldUpdateextensionReleaseData).length} of those ${
+    extensionsWithRepos.length
   } have missing or outdated release data.`
 );
 
-appsWithRepos.forEach((app) => {
-  if (shouldUpdateAppReleaseData(app)) {
-    limiter.schedule(getLatestRelease, app);
+extensionsWithRepos.forEach((extension) => {
+  if (shouldUpdateextensionReleaseData(extension)) {
+    limiter.schedule(getLatestRelease, extension);
   } else {
-    output[app.slug] = oldReleaseData[app.slug];
+    output[extension.slug] = oldReleaseData[extension.slug];
   }
 });
 
@@ -40,15 +40,15 @@ limiter.on("idle", () => {
   process.exit();
 });
 
-function shouldUpdateAppReleaseData(app) {
-  const oldData = oldReleaseData[app.slug];
+function shouldUpdateextensionReleaseData(extension) {
+  const oldData = oldReleaseData[extension.slug];
   if (!oldData || !oldData.latestReleaseFetchedAt) return true;
   const oldDate = new Date(oldData.latestReleaseFetchedAt || null).getTime();
   return oldDate + RELEASE_CACHE_TTL < Date.now();
 }
 
-function getLatestRelease(app) {
-  const { user: owner, repo } = parseGitUrl(app.repository);
+function getLatestRelease(extension) {
+  const { user: owner, repo } = parseGitUrl(extension.repository);
   const opts = {
     owner: owner,
     repo: repo,
@@ -60,15 +60,15 @@ function getLatestRelease(app) {
   return github.repos
     .getLatestRelease(opts)
     .then((release) => {
-      console.log(`${app.slug}: got latest release`);
-      output[app.slug] = {
+      console.log(`${extension.slug}: got latest release`);
+      output[extension.slug] = {
         latestRelease: release.data,
         latestReleaseFetchedAt: new Date(),
       };
     })
     .catch((err) => {
-      console.error(`${app.slug}: no releases found`);
-      output[app.slug] = {
+      console.error(`${extension.slug}: no releases found`);
+      output[extension.slug] = {
         latestRelease: null,
         latestReleaseFetchedAt: new Date(),
       };
