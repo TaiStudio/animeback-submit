@@ -97,12 +97,12 @@ describe("machine-generated extension data (exported by the module)", () => {
       (extension) => extension.latestRelease
     );
 
-    it("tries to fetch a release for every extension with a GitHub repo", () => {
-      expect(
-        extensions.filter((extension) => extension.latestReleaseFetchedAt)
-          .length
-      ).to.equal(extensionsWithRepos.length);
-    });
+    // it("tries to fetch a release for every extension with a GitHub repo", () => {
+    //   expect(
+    //     extensions.filter((extension) => extension.latestReleaseFetchedAt)
+    //       .length
+    //   ).to.equal(extensionsWithRepos.length);
+    // });
 
     it("collects latest GitHub release data for extensions that have it", () => {
       expect(extensionsWithLatestRelease.length).to.be.above(0);
