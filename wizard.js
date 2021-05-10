@@ -95,7 +95,7 @@ inquirer
     const basepath = path.join(__dirname, `extensions/${slug}`);
     const jsonPath = path.join(basepath, `${slug}.json`);
     mkdirp(basepath);
-    mkdirp(path.join(basepath, 'files'));
+    mkdirp(path.join(basepath, "files"));
     fs.writeFileSync(jsonPath, `${JSON.stringify(extension)} \r\n`);
     console.log();
     console.log(`Yay! Created ${path.relative(process.cwd(), jsonPath)}`);
