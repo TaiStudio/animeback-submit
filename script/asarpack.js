@@ -1,4 +1,5 @@
 const fs = require("fs");
+const path = require("path");
 const asar = require("asar");
 const extensions = require("../lib/raw-extensions-list")();
 const rimraf = require("rimraf").sync;
