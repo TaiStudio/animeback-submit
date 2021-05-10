@@ -1,0 +1,20 @@
+name: Notification on push
+
+on:
+  release:
+    types: [published]
+    
+jobs:
+  animeback:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Discord notification
+      uses: LeGitHubDeTai/github-to-discord@main
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        DISCORD_USERNAME: AnimeBot
+        DISCORD_AVATAR: https://raw.githubusercontent.com/LeGitHubDeTai/AnimeBack/main/icon.png
+        MESSAGE_TITLE: New Version
+        MESSAGE_DESCRIPTION: AnimeBack
+        MESSAGE_URL: https://github.com/LeGitHubDeTai/AnimeBack
+        MESSAGE_COLOR: 3066993
