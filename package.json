@@ -8,6 +8,7 @@
     "build:clean": "node script/clean",
     "build:resize": "node script/resize",
     "build:dates": "node script/dates",
+    "build:asarpack": "node script/asarpack",
     "build:colors": "node script/colors",
     "build:categories": "node script/categories",
     "build:releases": "node script/releases",
