@@ -9,6 +9,7 @@
     "build:resize": "node script/resize",
     "build:dates": "node script/dates",
     "build:asarpack": "node script/asarpack",
+    "build:asarclean": "node script/asarclean",
     "build:colors": "node script/colors",
     "build:categories": "node script/categories",
     "build:releases": "node script/releases",
