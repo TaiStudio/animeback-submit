@@ -15,11 +15,11 @@
     "build:pack": "node script/pack",
     "prepack": "check-for-leaks",
     "prepush": "check-for-leaks",
-    "prettier": "prettier --check \"./**/*.{ts,js,json}\"",
-    "test": "mocha --reporter min test/human-data.js test/colors-spec.js && prettier --check \"./**/*.{ts,js,json}\" --write",
-    "test:debug": "mocha --reporter spec test/human-data.js test/colors-spec.js && prettier --check \"./**/*.{ts,js,json}\" --write",
+    "prettier": "prettier --check \"./**/*.{ts,js,json,css}\"",
+    "test": "mocha --reporter min test/human-data.js test/colors-spec.js && prettier --check \"./**/*.{ts,js,json,css}\" --write",
+    "test:debug": "mocha --reporter spec test/human-data.js test/colors-spec.js && prettier --check \"./**/*.{ts,js,json,css}\" --write",
     "pretest-all": "npm run build",
-    "test-all": "mocha --reporter min && prettier --check \"./**/*.{ts,js,json}\" --write",
+    "test-all": "mocha --reporter min && prettier --check \"./**/*.{ts,js,json,css}\" --write",
     "wizard": "node wizard.js",
     "release": "script/release.sh"
   },
@@ -93,7 +93,7 @@
     "node": ">=8"
   },
   "lint-staged": {
-    "*.{js,ts,json}": "prettier --write"
+    "*.{js,ts,json,css}": "prettier --write"
   },
   "husky": {
     "hooks": {
