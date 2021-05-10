@@ -17,10 +17,10 @@ if [ "$(git status --porcelain)" = "" ]; then
   exit
 fi
 
-git config user.email tai.studio@outlook.fr
-git config user.name taistudio
+git config user.email animebot.tai.studio@outlook.fr
+git config user.name AnimeBot
 git add .
-git commit -am "update extensions" --author "AnimeBot <tai.studio@outlook.fr>"
+git commit -am "update extensions" --author "AnimeBot <animebot.tai.studio@outlook.fr>"
 npm version minor -m "bump minor to %s"
 git pull --rebase
 git push origin master
