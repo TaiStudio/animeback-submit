@@ -1,0 +1,55 @@
+<!--------------------------------------------------------------------------------------\
+|  _______    _    _____ _             _ _           ________     ___   ___ ___  __     |
+| |__   __|  (_)  / ____| |           | (_)         /  ____  \   |__ \ / _ \__ \/_ |    |
+|    | | __ _ _  | (___ | |_ _   _  __| |_  ___    /  / ___|  \     ) | | | | ) || |    |
+|    | |/ _` | |  \___ \| __| | | |/ _` | |/ _ \  |  | |       |   / /| | | |/ / | |    |
+|    | | (_| | |  ____) | |_| |_| | (_| | | (_) | |  | |___    |  / /_| |_| / /_ | |    |
+|    |_|\__,_|_| |_____/ \__|\__,_|\__,_|_|\___/   \  \____|  /  |____|\___/____||_|    |
+|                                                   \________/                          |
+\--------------------------------------------------------------------------------------->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Options | Clock</title>
+        <link rel="stylesheet" href="./css/font.css">
+        <link rel="stylesheet" href="./css/scrollbar.css">
+        <link rel="stylesheet" href="./css/options.css">
+        <link rel="shortcut icon" href="../icon.ico" type="image/x-icon">
+        <style>
+            body{
+                background: #262626;
+            }
+        </style>
+    </head>
+    <body>
+        <input type="number" name="top" id="top" min="0" max="100">
+        <input type="number" name="left" id="left" min="0" max="100">
+        <select name="theme" id="theme">
+            <option value="default">default</option>
+            <option value="glitch">glitch</option>
+        </select>
+    </body>
+    <script>
+        const $ = require('jquery');
+        const { ipcRenderer } = require('electron');
+        $(document).ready(function(){
+            $('#left').change(function(){
+                ipcRenderer.send('optionClock', $('#top').val(), $('#left').val(), $('#theme').val());
+            });
+            $('#top').change(function(){
+                ipcRenderer.send('optionClock', $('#top').val(), $('#left').val(), $('#theme').val());
+            });
+            $('#theme').change(function(){
+                ipcRenderer.send('optionClock', $('#top').val(), $('#left').val(), $('#theme').val());
+            });
+        });
+        function load(arg, arg1, arg2){
+            $('#top').val(arg);
+            $('#left').val(arg1);
+            $('#theme').val(arg2);
+        }
+    </script>
+</html>

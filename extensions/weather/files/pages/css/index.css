@@ -1,0 +1,16 @@
+body{
+    background: #121212;
+    color: white;
+    overflow: hidden;
+    text-align: center;
+}
+div{
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 3em;
+    transform: translate(0, -50%);
+}
