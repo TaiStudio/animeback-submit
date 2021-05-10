@@ -8,7 +8,6 @@ console.log("Clean extension submission files dir...");
 extensions.forEach((extension) => {
   var src = path.join(__dirname, `../extensions/${extension.slug}/files`);
   if (fs.existsSync(src)) {
-
     rimraf(src);
 
     console.log("done.");
