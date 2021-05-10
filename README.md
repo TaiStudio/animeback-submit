@@ -1,4 +1,4 @@
-# animeback-submit ![Continous Integration](https://github.com/TaiStudio/animeback-submit/actions/workflows/test.yml/badge.svg)
+# animeback-submit [![Continous Integration](https://github.com/TaiStudio/animeback-submit/actions/workflows/schedule.yml/badge.svg)](https://github.com/TaiStudio/animeback-submit/actions/workflows/schedule.yml)
 
 A collection of extensions.
 
