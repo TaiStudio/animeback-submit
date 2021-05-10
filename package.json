@@ -1,6 +1,6 @@
 {
   "name": "animeback-submit",
-  "version": "1.16.0",
+  "version": "1.17.0",
   "description": "submission system for animeback extensions",
   "main": "main.js",
   "scripts": {
