@@ -20,7 +20,7 @@ fi
 git config user.email tai.studio@outlook.fr
 git config user.name taistudio
 git add .
-git commit -am "update extensions" --author "Tai Studio <tai.studio@outlook.fr>"
+git commit -am "update extensions" --author "AnimeBot <tai.studio@outlook.fr>"
 npm version minor -m "bump minor to %s"
 git pull --rebase
 git push origin master
