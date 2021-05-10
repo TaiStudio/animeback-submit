@@ -110,4 +110,4 @@
 
         setInterval(clock, inc);
     </script>
-`
+`;
