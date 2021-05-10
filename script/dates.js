@@ -5,7 +5,7 @@ const dates = require(datesPath);
 const existingSlugs = Object.keys(dates);
 const extensions = require("../lib/raw-extensions-list")();
 
-console.log("Checking app submission dates...");
+console.log("Checking extension submission dates...");
 
 extensions
   .filter((extension) => existingSlugs.indexOf(extension.slug) === -1)
