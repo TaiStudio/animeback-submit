@@ -5,7 +5,7 @@ set -o errexit    # always exit on error
 set -o pipefail   # honor exit codes when piping
 set -o nounset    # fail on unset variables
 
-git clone "https://taistudio:$GH_TOKEN@github.com/TaiStudio/animeback-submit" extension
+git clone "https://AnimeBack-Bot:$GH_TOKEN@github.com/TaiStudio/animeback-submit" extension
 cd extension
 npm ci
 
@@ -18,9 +18,9 @@ if [ "$(git status --porcelain)" = "" ]; then
 fi
 
 git config user.email animebot.tai.studio@outlook.fr
-git config user.name AnimeBot
+git config user.name AnimeBack-Bot
 git add .
-git commit -am "update extensions" --author "AnimeBot <animebot.tai.studio@outlook.fr>"
+git commit -am "update extensions" --author "AnimeBack-Bot <animebot.tai.studio@outlook.fr>"
 npm version minor -m "bump minor to %s"
 git pull --rebase
 git push origin master
