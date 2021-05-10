@@ -13,7 +13,7 @@ extensions.forEach((extension) => {
 
     asar.createPackage(src, dest);
 
-    rimraf(src, function () {
+    rimraf(src, [], function () {
       console.log(`remove file: ${extension.slug}`);
     });
     console.log("done.");
