@@ -12,7 +12,7 @@ please read the [contributing](CONTRIBUTING.md) doc.
 See [CONTRIBUTING.md#how-it-works](CONTRIBUTING.md#how-it-works)
 
 ## Download Animeback for FREE:
-<a href="https://legithubdetai.github.io/AnimeBack/">
+<a href="https://animeback.tai-studio.ml/">
   <img src="https://img.shields.io/github/downloads/LeGitHubDeTai/AnimeBack/total">
 </a>
 
