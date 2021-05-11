@@ -61,7 +61,7 @@
     "human-interval": "^2.0.1",
     "husky": "^4.2.3",
     "image-size": "^1.0.0",
-    "imagemin": "^6.1.0",
+    "imagemin": "^8.0.0",
     "inquirer": "^8.0.0",
     "is-hexcolor": "^1.0.0",
     "is-svg": "^4.2.2",
