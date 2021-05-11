@@ -59,7 +59,7 @@
     "get-image-colors": "^4.0.0",
     "github-url-to-object": "^4.0.6",
     "human-interval": "^2.0.1",
-    "husky": "^4.2.3",
+    "husky": "^6.0.0",
     "image-size": "^1.0.0",
     "imagemin": "^8.0.0",
     "inquirer": "^8.0.0",
