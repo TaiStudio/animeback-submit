@@ -68,7 +68,7 @@
     "is-url": "^1.2.4",
     "jimp": "^0.16.1",
     "jpeg-js": ">=0.4.0",
-    "lint-staged": "^10.0.9",
+    "lint-staged": "^11.0.0",
     "make-color-accessible": "^1.2.0",
     "mkdirp": "^1.0.4",
     "mocha": "^8.4.0",
