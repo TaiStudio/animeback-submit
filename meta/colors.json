@@ -9,6 +9,16 @@
       "revHash": "2391215b64"
     }
   },
+  "getfps": {
+    "faintColorOnWhite": "rgba(8, 4, 4, 0.1)",
+    "goodColorOnBlack": "#FFF",
+    "goodColorOnWhite": "#080404",
+    "palette": ["#040404", "#080404", "#080404", "#080404", "#080404"],
+    "source": {
+      "path": "extensions/getfps/getfps-icon.png",
+      "revHash": "ebd35050bd"
+    }
+  },
   "weather": {
     "faintColorOnWhite": "rgba(158, 106, 16, 0.1)",
     "goodColorOnBlack": "#F5D49C",
