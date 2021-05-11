@@ -23,7 +23,8 @@
     "pretest-all": "npm run build",
     "test-all": "mocha --reporter min && prettier --check \"./**/*.{ts,js,json,css}\" --write",
     "wizard": "node wizard.js",
-    "release": "script/release.sh"
+    "release": "script/release.sh",
+    "start": "node script/server.js"
   },
   "repository": {
     "type": "git",
@@ -87,6 +88,8 @@
     "url": "^0.11.0"
   },
   "dependencies": {
+    "animeback-submit": "^1.19.0",
+    "express": "^4.17.1",
     "json-stable-stringify": "^1.0.1",
     "mime-types": "^2.1.30",
     "rev-hash": "^3.0.0"
