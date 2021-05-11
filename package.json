@@ -24,7 +24,10 @@
     "test-all": "mocha --reporter min && prettier --check \"./**/*.{ts,js,json,css}\" --write",
     "wizard": "node wizard.js",
     "release": "script/release.sh",
-    "start": "npm upgrade && node script/server.js"
+    "start": "node script/server.js"
+  },
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
   },
   "repository": {
     "type": "git",
