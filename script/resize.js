@@ -4,9 +4,9 @@ const fs = require("fs");
 const recursiveReadSync = require("recursive-readdir-sync");
 const imagemin = require("imagemin");
 // const imageminPngquant = require('imagemin-pngquant')
-const icons = recursiveReadSync(
-  path.join(__dirname, "../extensions")
-).filter((file) => file.match(/icon\.png/));
+const icons = recursiveReadSync(path.join(__dirname, "../extensions")).filter(
+  (file) => file.match(/icon\.png/)
+);
 
 process.stdout.write(`Resizing ${icons.length} icons...`);
 
