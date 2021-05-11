@@ -48,7 +48,7 @@
     "@zeit/fetch-retry": "^5.0.1",
     "animeback-submit": "^1.19.0",
     "asar": "^3.0.3",
-    "bottleneck": "^2.19.5",
+    "bottleneck": "^1.16.0",
     "chai": "^4.3.4",
     "check-for-leaks": "^1.2.1",
     "cheerio": "^0.22.0",
