@@ -26,9 +26,6 @@
     "release": "script/release.sh",
     "start": "node script/server.js"
   },
-  "publishConfig": {
-    "registry":"https://npm.pkg.github.com"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TaiStudio/animeback-submit.git"
