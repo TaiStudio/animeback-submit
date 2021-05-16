@@ -1,0 +1,10 @@
+{
+  "name": "DiscordEmbed",
+  "description": "Add Discord Embed into your wallpapers.",
+  "author": "Tai Studio",
+  "version": "1.0.0",
+  "website": "https://tai-studio.ml",
+  "category": "News",
+  "keywords": ["tai", "studio", "discord", "embed"],
+  "license": "MIT"
+}
