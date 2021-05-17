@@ -18,8 +18,7 @@ fs.readdirSync(path.join(__dirname, "../extensions"))
     var content = fs.readFileSync(jsonFile);
     const extension = Object.assign(
       { slug: slug },
-      JSON.parse(content.toString())
-      ,
+      JSON.parse(content.toString()),
       {
         icon: `${slug}-icon.png`,
         icon32: `${slug}-icon-32.png`,
@@ -32,7 +31,7 @@ fs.readdirSync(path.join(__dirname, "../extensions"))
       releases[slug],
       readmes[slug]
     );
-      console.log(extension)
+    console.log(extension);
     extension.goodColorOnWhite =
       extension.goodColorOnWhite || colors[slug].goodColorOnWhite;
     extension.goodColorOnBlack =
