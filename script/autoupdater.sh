@@ -23,7 +23,7 @@ fi
 git config user.email animebot.tai.studio@outlook.fr
 git config user.name AnimeBack-Bot
 git add .
-git commit -am "update extensions" --author "AnimeBack-Bot <animebot.tai.studio@outlook.fr>"
+git commit -am "update version" --author "AnimeBack-Bot <animebot.tai.studio@outlook.fr>"
 git pull --rebase
 git push origin master
 git push origin master --tags
