@@ -55,5 +55,5 @@ fs.readdirSync(path.join(__dirname, "../extensions"))
 
 fs.writeFileSync(
   path.join(__dirname, "../index.json"),
-  extensions
+  JSON.stringify(extensions, null, 2)
 );
