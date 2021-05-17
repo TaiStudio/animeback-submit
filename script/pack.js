@@ -31,6 +31,7 @@ fs.readdirSync(path.join(__dirname, "../extensions"))
       releases[slug],
       readmes[slug]
     );
+    
     extension.goodColorOnWhite =
       extension.goodColorOnWhite || colors[slug].goodColorOnWhite;
     extension.goodColorOnBlack =
