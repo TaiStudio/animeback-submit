@@ -9,6 +9,16 @@
       "revHash": "2391215b64"
     }
   },
+  "discordembed": {
+    "faintColorOnWhite": "rgba(84, 100, 244, 0.1)",
+    "goodColorOnBlack": "#5464F4",
+    "goodColorOnWhite": "#5464F4",
+    "palette": ["#5c64f4", "#5464f4", "#6064f4", "#6064f4", "#6064f4"],
+    "source": {
+      "path": "extensions/discordembed/discordembed-icon.png",
+      "revHash": "2094852a89"
+    }
+  },
   "getfps": {
     "faintColorOnWhite": "rgba(8, 4, 4, 0.1)",
     "goodColorOnBlack": "#FFF",
