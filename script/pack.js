@@ -17,7 +17,7 @@ fs.readdirSync(path.join(__dirname, "../extensions"))
     const jsonFile = path.join(__dirname, `../extensions/${slug}/${slug}.json`);
     const extension = Object.assign(
       { slug: slug },
-      fs.readFileSync(jsonFile),
+      fs.readFileSync(jsonFile).toString(),
       {
         icon: `${slug}-icon.png`,
         icon32: `${slug}-icon-32.png`,
@@ -31,21 +31,14 @@ fs.readdirSync(path.join(__dirname, "../extensions"))
       readmes[slug]
     );
 
-    extension.goodColorOnWhite =
-      extension.goodColorOnWhite || colors[slug].goodColorOnWhite;
-    extension.goodColorOnBlack =
-      extension.goodColorOnBlack || colors[slug].goodColorOnBlack;
-    extension.faintColorOnWhite =
-      extension.faintColorOnWhite || colors[slug].faintColorOnWhite;
+    extension.goodColorOnWhite = extension.goodColorOnWhite || colors[slug].goodColorOnWhite;
+    extension.goodColorOnBlack = extension.goodColorOnBlack || colors[slug].goodColorOnBlack;
+    extension.faintColorOnWhite = extension.faintColorOnWhite || colors[slug].faintColorOnWhite;
 
     // Delete website if it's the same URL as repository
     const parsedWebsite = parseGitHubUrl(extension.website);
     const parsedRepo = parseGitHubUrl(extension.repository);
-    if (
-      parsedWebsite &&
-      parsedRepo &&
-      parsedWebsite.https_url === parsedRepo.https_url
-    ) {
+    if (parsedWebsite && parsedRepo && parsedWebsite.https_url === parsedRepo.https_url){
       delete extension.website;
     }
 
