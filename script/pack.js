@@ -27,6 +27,7 @@ fs.readdirSync(path.join(__dirname, "../extensions"))
         icon256: `${slug}-icon-256.png`,
         date: dates[slug],
         iconColors: colors[slug].palette,
+        filename: `${slug}.asar`,
       },
       releases[slug],
       readmes[slug]
