@@ -7,7 +7,7 @@ set -o nounset    # fail on unset variables
 
 git clone "https://AnimeBack-Bot:$GH_TOKEN@github.com/TaiStudio/animeback-submit" update
 cd update
-npm install
+npm ci
 
 npm update
 
