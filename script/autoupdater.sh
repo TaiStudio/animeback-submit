@@ -18,6 +18,7 @@ npm upgrade
 if [ "$(git status --porcelain)" = "" ]; then
   echo "no new content found; goodbye!"
   npm start
+  exit
 fi
 
 git config user.email animebot.tai.studio@outlook.fr
