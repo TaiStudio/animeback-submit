@@ -24,7 +24,11 @@
     "test-all": "mocha --reporter min && prettier --check \"./**/*.{ts,js,json,css}\" --write",
     "wizard": "node wizard.js",
     "release": "script/release.sh",
-    "start": "node script/server.js"
+    "start": "npm-run-all server:*",
+    "server:install": "npm install",
+    "server:update": "npm update",
+    "server:upgrade": "npm upgrade",
+    "server:run": "node script/server.js"
   },
   "repository": {
     "type": "git",
