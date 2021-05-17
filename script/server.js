@@ -5,7 +5,7 @@ const port = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
   res.header("Content-Type", "application/json");
-  res.send(animeback_submit);
+  res.send(JSON.parse(animeback_submit));
 });
 
 app.listen(port, () => {
