@@ -1,0 +1,10 @@
+{
+  "name": "getCPU",
+  "description": "Get pourcent of your CPU.",
+  "author": "Tai Studio",
+  "version": "1.0.0",
+  "website": "https://tai-studio.ml",
+  "category": "Utilities",
+  "keywords": ["tai", "studio", "get", "cpu"],
+  "license": "MIT"
+}
