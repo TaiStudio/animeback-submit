@@ -2,6 +2,10 @@
 
 A collection of extensions.
 
+## Create your extenions
+If you are a developer and / or you want to create an extension
+please read the [Wiki](https://github.com/LeGitHubDeTai/AnimeBack/wiki/Extensions).
+
 ## Adding your extension
 
 If you have an Animeback extension you'd like to see added,
