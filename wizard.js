@@ -7,6 +7,7 @@ const slugify = require("slugg");
 const mkdirp = require("mkdirp");
 const cleanDeep = require("clean-deep");
 const existingSlugs = fs.readdirSync(path.join(__dirname, "extensions"));
+var createFile = require('create-file');
 
 const questions = [
   {
@@ -96,7 +97,8 @@ inquirer
     const jsonPath = path.join(basepath, `${slug}.json`);
     mkdirp(basepath);
     mkdirp(path.join(basepath, "files"));
-    fs.writeFileSync(jsonPath, `${JSON.stringify(extension)} \r\n`);
+    createFile(jsonPath, `${JSON.stringify(extension)} \r\n`, function (err) {
+    });
     console.log();
     console.log(`Yay! Created ${path.relative(process.cwd(), jsonPath)}`);
     console.log(`Now you just need to add an icon named ${slug}-icon.png\n`);
@@ -114,3 +116,4 @@ inquirer
   .catch((error) => {
     console.error(error);
   });
+ 
