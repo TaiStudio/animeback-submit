@@ -1,0 +1,10 @@
+{
+  "name": "getNetwork",
+  "description": "Get pourcent of your Network.",
+  "author": "Tai Studio",
+  "version": "1.0.0",
+  "website": "https://tai-studio.ml",
+  "category": "Utilities",
+  "keywords": ["tai", "studio", "get", "network"],
+  "license": "MIT"
+}
