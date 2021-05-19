@@ -39,6 +39,16 @@
       "revHash": "ebd35050bd"
     }
   },
+  "getnetwork": {
+    "faintColorOnWhite": "rgba(8, 4, 4, 0.1)",
+    "goodColorOnBlack": "#FFF",
+    "goodColorOnWhite": "#080404",
+    "palette": ["#040404", "#080404", "#080404", "#080404", "#080404"],
+    "source": {
+      "path": "extensions/getnetwork/getnetwork-icon.png",
+      "revHash": "0fabcbbfed"
+    }
+  },
   "weather": {
     "faintColorOnWhite": "rgba(158, 106, 16, 0.1)",
     "goodColorOnBlack": "#F5D49C",
