@@ -1,0 +1,10 @@
+{
+  "name": "Spotify",
+  "description": "Embed spotify player into your wallpapers.",
+  "author": "Tai Studio",
+  "version": "1.0.0",
+  "website": "https://tai-studio.ml",
+  "category": "Music",
+  "keywords": ["tai", "studio", "spotify"],
+  "license": "MIT"
+}
