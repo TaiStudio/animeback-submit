@@ -90,7 +90,6 @@
     "url": "^0.11.0"
   },
   "dependencies": {
-    "animeback-submit": "^1.19.0",
     "create-file": "^1.0.1",
     "express": "^4.17.1",
     "har-validator": "^5.1.5",
