@@ -1,4 +1,14 @@
 {
+  "clock": {
+    "faintColorOnWhite": "rgba(52, 52, 52, 0.1)",
+    "goodColorOnBlack": "#D5D5D5",
+    "goodColorOnWhite": "#343434",
+    "palette": ["#d5d5d5", "#343434", "#646464", "#838383", "#6c6c6c"],
+    "source": {
+      "path": "extensions/clock/clock-icon.png",
+      "revHash": "2391215b64"
+    }
+  },
   "discordembed": {
     "faintColorOnWhite": "rgba(84, 100, 244, 0.1)",
     "goodColorOnBlack": "#5464F4",
