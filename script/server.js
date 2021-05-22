@@ -1,5 +1,5 @@
 const express = require("express");
-const animeback_submit = require("animeback-submit");
+const animeback_submit = require("@taistudio/animeback-submit");
 const app = express();
 const port = process.env.PORT || 3000;
 
