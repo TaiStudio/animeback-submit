@@ -10,19 +10,17 @@ extensions.forEach((extension) => {
     var src = path.join(__dirname, `../extensions/${extension.slug}/files`);
 
     exec(`cd ${src} && npm install`, (error, stdout, stderr) => {
-        if (error) {
-            console.log(`error: ${error.message}`);
-            return;
-        }
-        if (stderr) {
-            console.log(`stderr: ${stderr}`);
-            return;
-        }
-        console.log(`stdout: ${stdout}`);
+      if (error) {
+        console.log(`error: ${error.message}`);
+        return;
+      }
+      if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        return;
+      }
+      console.log(`stdout: ${stdout}`);
     });
 
     console.log("done.");
   }
 });
-
-

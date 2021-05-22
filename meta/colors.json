@@ -26,7 +26,7 @@
     "palette": ["#f4f4f4", "#070707", "#848484", "#7c7c7c", "#747474"],
     "source": {
       "path": "extensions/getcpu/getcpu-icon.png",
-      "revHash": "907919c449"
+      "revHash": "53005aae0e"
     }
   },
   "getfps": {
@@ -36,7 +36,7 @@
     "palette": ["#040404", "#080404", "#080404", "#080404", "#080404"],
     "source": {
       "path": "extensions/getfps/getfps-icon.png",
-      "revHash": "ebd35050bd"
+      "revHash": "7418b4ef28"
     }
   },
   "getnetwork": {
@@ -47,6 +47,16 @@
     "source": {
       "path": "extensions/getnetwork/getnetwork-icon.png",
       "revHash": "0fabcbbfed"
+    }
+  },
+  "spotify": {
+    "faintColorOnWhite": "rgba(17, 126, 59, 0.1)",
+    "goodColorOnBlack": "#1CD464",
+    "goodColorOnWhite": "#117E3B",
+    "palette": ["#fbfbfb", "#1cd464", "#6de498", "#96ecb4", "#8aecac"],
+    "source": {
+      "path": "extensions/spotify/spotify-icon.png",
+      "revHash": "b3e05d7596"
     }
   },
   "weather": {
