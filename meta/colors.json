@@ -1,2 +1,72 @@
 {
+  "clock": {
+    "faintColorOnWhite": "rgba(52, 52, 52, 0.1)",
+    "goodColorOnBlack": "#D5D5D5",
+    "goodColorOnWhite": "#343434",
+    "palette": ["#d5d5d5", "#343434", "#646464", "#838383", "#6c6c6c"],
+    "source": {
+      "path": "extensions/clock/clock-icon.png",
+      "revHash": "2391215b64"
+    }
+  },
+  "discordembed": {
+    "faintColorOnWhite": "rgba(84, 100, 244, 0.1)",
+    "goodColorOnBlack": "#5464F4",
+    "goodColorOnWhite": "#5464F4",
+    "palette": ["#5c64f4", "#5464f4", "#6064f4", "#6064f4", "#6064f4"],
+    "source": {
+      "path": "extensions/discordembed/discordembed-icon.png",
+      "revHash": "2094852a89"
+    }
+  },
+  "getcpu": {
+    "faintColorOnWhite": "rgba(7, 7, 7, 0.1)",
+    "goodColorOnBlack": "#F4F4F4",
+    "goodColorOnWhite": "#070707",
+    "palette": ["#f4f4f4", "#070707", "#848484", "#7c7c7c", "#747474"],
+    "source": {
+      "path": "extensions/getcpu/getcpu-icon.png",
+      "revHash": "53005aae0e"
+    }
+  },
+  "getfps": {
+    "faintColorOnWhite": "rgba(8, 4, 4, 0.1)",
+    "goodColorOnBlack": "#FFF",
+    "goodColorOnWhite": "#080404",
+    "palette": ["#040404", "#080404", "#080404", "#080404", "#080404"],
+    "source": {
+      "path": "extensions/getfps/getfps-icon.png",
+      "revHash": "7418b4ef28"
+    }
+  },
+  "getnetwork": {
+    "faintColorOnWhite": "rgba(8, 4, 4, 0.1)",
+    "goodColorOnBlack": "#FFF",
+    "goodColorOnWhite": "#080404",
+    "palette": ["#040404", "#080404", "#080404", "#080404", "#080404"],
+    "source": {
+      "path": "extensions/getnetwork/getnetwork-icon.png",
+      "revHash": "0fabcbbfed"
+    }
+  },
+  "spotify": {
+    "faintColorOnWhite": "rgba(17, 126, 59, 0.1)",
+    "goodColorOnBlack": "#1CD464",
+    "goodColorOnWhite": "#117E3B",
+    "palette": ["#fbfbfb", "#1cd464", "#6de498", "#96ecb4", "#8aecac"],
+    "source": {
+      "path": "extensions/spotify/spotify-icon.png",
+      "revHash": "b3e05d7596"
+    }
+  },
+  "weather": {
+    "faintColorOnWhite": "rgba(158, 106, 16, 0.1)",
+    "goodColorOnBlack": "#F5D49C",
+    "goodColorOnWhite": "#9E6A10",
+    "palette": ["#e99f2f", "#fbf7f2", "#edb86e", "#f5d49c", "#eccca4"],
+    "source": {
+      "path": "extensions/weather/weather-icon.png",
+      "revHash": "4b915235c4"
+    }
+  }
 }
