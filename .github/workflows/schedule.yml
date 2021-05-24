@@ -19,6 +19,7 @@ jobs:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
           
   build:
+    needs: updateDataAndRelease
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
