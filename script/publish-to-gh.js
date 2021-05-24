@@ -4,7 +4,9 @@ const packageJSON = require("../package.json");
 const github = require("../lib/github");
 
 async function main() {
-  const name = `${packageJSON.name.replace('/', '-').replace('@', '')}-${packageJSON.version}.tgz`;
+  const name = `${packageJSON.name.replace("/", "-").replace("@", "")}-${
+    packageJSON.version
+  }.tgz`;
   const archivePath = path.resolve(__dirname, `../${name}`);
 
   if (!fs.existsSync(archivePath)) {
