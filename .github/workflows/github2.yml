@@ -3,44 +3,19 @@ name: Node.js Package2
 on: workflow_dispatch
 
 jobs:
-  updateDataAndRelease:
-    name: Update data and release
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2.3.4
-      - name: Chmod
-        run: chmod +x ./script/release.sh
-      - name: Update data and release
-        run: npm run release
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-          
   build:
-    needs: updateDataAndRelease
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2.1.5
-        with:
-          node-version: 12
-      - run: npm ci
-      - run: npm test
-
-  publish-gpr:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      packages: write
+    runs-on: ubuntu-latest 
+    permissions: 
       contents: read
+      packages: write 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2.1.5
+      # Setup .npmrc file to publish to GitHub Packages
+      - uses: actions/setup-node@v1
         with:
-          node-version: 12
-          registry-url: https://npm.pkg.github.com/
-          scope: '@taistudio'
-      - run: npm ci
+          registry-url: 'https://npm.pkg.github.com'
+          # Defaults to the user or organization that owns the workflow file
+          scope: '@octocat'
+      # Publish to GitHub Packages
       - run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
+          NODE_AUTH_TOKEN: ${{ secrets.GH_TOKEN }}
