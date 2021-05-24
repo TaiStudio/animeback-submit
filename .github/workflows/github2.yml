@@ -15,16 +15,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-          
-  build:
-    needs: updateDataAndRelease
-    runs-on: ubuntu-latest 
-    permissions: 
-      contents: read
-      packages: write 
-    steps:
-      - uses: actions/checkout@v2
-      # Setup .npmrc file to publish to GitHub Packages
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
