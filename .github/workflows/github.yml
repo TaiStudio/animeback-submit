@@ -6,7 +6,7 @@ on:
 
 jobs:
   updateDataAndRelease:
-    name: Update data and release
+    name: Github Package
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
