@@ -1,5 +1,9 @@
 # animeback-submit [![Continous Integration](https://github.com/TaiStudio/animeback-submit/actions/workflows/schedule.yml/badge.svg)](https://github.com/TaiStudio/animeback-submit/actions/workflows/schedule.yml)
 
+<p align='center'>
+  <a href="https://buymeacoffee.com/taistudio" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png" alt="Buy Me A Coffee"></a>
+</p>
+
 A collection of extensions.
 
 ## ⚙️ Create your extenions
