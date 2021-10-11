@@ -58,7 +58,7 @@
     "count-array-values": "^1.2.1",
     "dotenv-safe": "^8.2.0",
     "fs": "^0.0.1-security",
-    "get-image-colors": "^2.0.1",
+    "get-image-colors": "^4.0.0",
     "github-url-to-object": "^4.0.6",
     "human-interval": "^2.0.1",
     "husky": "^6.0.0",
