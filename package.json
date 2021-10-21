@@ -83,7 +83,7 @@
     "readdirp": "^3.5.0",
     "recursive-readdir-sync": "^1.0.6",
     "rimraf": "^3.0.2",
-    "sharp": "^0.28.1",
+    "sharp": "^0.29.2",
     "sinon": "^11.0.0",
     "slugg": "^1.2.1",
     "tinycolor2": "^1.4.2",
