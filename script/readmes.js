@@ -13,7 +13,9 @@ const parseGitUrl = require("github-url-to-object");
 const outputFile = path.join(__dirname, "../meta/readmes.json");
 const oldReadmeData = require(outputFile);
 const output = {};
-const limiter = new Bottleneck(MAX_CONCURRENCY);
+const limiter = new Bottleneck({
+  maxConcurrent: MAX_CONCURRENCY,
+})
 
 const extensions = require("../lib/raw-extensions-list")();
 const extensionsWithRepos = require("../lib/extensions-with-github-repos");
@@ -32,91 +34,96 @@ console.log(
 );
 
 extensionsToUpdate.forEach((extension) => {
-  limiter.schedule(getReadme, extension);
-});
-
-limiter.on("idle", () => {
-  fs.writeFileSync(outputFile, JSON.stringify(output, null, 2));
-  console.log(`Done fetching README files.\nWrote ${outputFile}`);
-  process.exit();
-});
-
-function getReadme(extension) {
-  const { user: owner, repo } = parseGitUrl(extension.repository);
-  const opts = {
-    owner: owner,
-    repo: repo,
-    headers: {
-      Accept: "application/vnd.github.v3.html",
-    },
-  };
-
-  return github.repos
-    .get(opts)
+  limiter
+    .schedule(getReadme, extension)
     .then((repository) => {
-      return repository.data.default_branch;
+      return repository.data.default_branch
     })
     .catch((err) => {
       if (err.status !== 404) {
-        console.error(`${extension.slug}: Non 404 error`);
-        console.error(err);
+        console.error(`${extension.slug}: Non 404 error`)
+        console.error(err)
       }
 
-      return;
+      return
     })
     .then((defaultBranch) => {
-      github.repos
-        .getReadme(opts)
+      limiter
+        .schedule(getReadme, extension, defaultBranch)
         .then((release) => {
-          console.log(`${extension.slug}: got latest README`);
+          console.log(`${extension.slug}: got latest README`)
           output[extension.slug] = {
             readmeCleaned: cleanReadme(release.data, defaultBranch, extension),
             readmeOriginal: release.data,
             readmeFetchedAt: new Date(),
-          };
+          }
         })
         .catch((err) => {
-          console.error(`${extension.slug}: no README found`);
+          console.error(`${extension.slug}: no README found`)
           output[extension.slug] = {
             readmeOriginal: null,
             readmeFetchedAt: new Date(),
-          };
-          if (err.status !== 404) {
-            console.error(`${extension.slug}: Non 404 error`);
-            console.error(err);
           }
-        });
-    });
+          if (err.status !== 404) {
+            console.error(`${extension.slug}: Non 404 error`)
+            console.error(err)
+          }
+        })
+    })
+});
+
+limiter.on("idle", () => {
+  setTimeout(() => {
+    fs.writeFileSync(outputFile, JSON.stringify(output, null, 2));
+    console.log(`Done fetching README files.\nWrote ${outputFile}`);
+    process.exit();
+  }, 1000)
+});
+
+
+function getReadme(extension, defaultBranch) {
+  const { user: owner, repo } = parseGitUrl(extension.repository)
+  const opts = {
+    owner: owner,
+    repo: repo,
+    headers: {
+      Accept: 'application/vnd.github.v3.html',
+    },
+  }
+
+  if (defaultBranch) {
+    return github.repos.getReadme(opts)
+  }
+
+  return github.repos.get(opts)
 }
 
 function cleanReadme(readme, defaultBranch, extension) {
-  const $ = cheerio.load(readme);
+  const $ = cheerio.load(readme)
 
-  const $relativeImages = $("img").not('[src^="http"]');
+  const $relativeImages = $('img').not('[src^="http"]')
   if ($relativeImages.length) {
     console.log(
       `${extension.slug}: updating ${$relativeImages.length} relative image URLs`
-    );
+    )
     $relativeImages.each((i, img) => {
       $(img).attr(
-        "src",
-        `${extension.repository}/raw/${defaultBranch}/${$(img).attr("src")}`
-      );
-    });
+        'src',
+        `${extension.repository}/raw/${defaultBranch}/${$(img).attr('src')}`
+      )
+    })
   }
 
-  const $relativeLinks = $("a").not('[href^="http"]');
+  const $relativeLinks = $('a').not('[href^="http"]')
   if ($relativeLinks.length) {
-    console.log(
-      `${extension.slug}: updating ${$relativeLinks.length} relative links`
-    );
+    console.log(`${extension.slug}: updating ${$relativeLinks.length} relative links`)
     $relativeLinks.each((i, link) => {
       $(link).attr(
-        "href",
-        `${extension.repository}/blob/${defaultBranch}/${$(link).attr("href")}`
-      );
-    });
+        'href',
+        `${extension.repository}/blob/${defaultBranch}/${$(link).attr('href')}`
+      )
+    })
   }
 
-  return $("body").html();
+  return $('body').html()
 }
