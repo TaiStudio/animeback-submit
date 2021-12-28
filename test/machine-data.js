@@ -93,9 +93,9 @@ describe("machine-generated extension data (exported by the module)", () => {
 
   describe("releases", () => {
     const extensionsWithRepos = require("../lib/extensions-with-github-repos");
-    const extensionsWithLatestRelease = extensions.filter(
-      (extension) => extension.latestRelease
-    );
+    // const extensionsWithLatestRelease = extensions.filter(
+    //   (extension) => extension.latestRelease
+    // );
 
     // it("tries to fetch a release for every extension with a GitHub repo", () => {
     //   expect(
