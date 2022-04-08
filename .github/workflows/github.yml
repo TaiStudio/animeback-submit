@@ -9,7 +9,7 @@ jobs:
     name: Github Package
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2.4.0
+      - uses: actions/checkout@v3.0.0
       - name: Chmod
         run: chmod +x ./script/release.sh
       - name: Update data and release
