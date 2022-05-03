@@ -20,7 +20,7 @@ please read the [contributing](CONTRIBUTING.md) doc.
 See [CONTRIBUTING.md#how-it-works](CONTRIBUTING.md#how-it-works)
 
 ## 📥 Download Animeback for FREE:
-<a href="https://animeback.tai-studio.ml/">
+<a href="https://animeback-tai-studio.netlify.app/">
   <img src="https://img.shields.io/github/downloads/LeGitHubDeTai/AnimeBack/total">
 </a>
 
