@@ -167,7 +167,7 @@ Example:
   "description": "Display weather in your wallpaper.",
   "author": "Tai Studio",
   "version": "1.0.0",
-  "website": "https://tai-studio.ml",
+  "website": "https://tai-studio.netlify.app",
   "category": "News",
   "keywords": ["tai", "studio", "weather", "wallpaper"],
   "license": "MIT",
