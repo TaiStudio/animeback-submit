@@ -6,7 +6,25 @@
 
 const fs = require("fs");
 const path = require("path");
-const rimraf = require("rimraf").sync;
+
+function removeFileOrFolder(path) {
+  if (fs.existsSync(path)) {
+    const stats = fs.statSync(path);
+    if (stats.isFile()) {
+      fs.unlinkSync(path);
+    } else {
+      fs.readdirSync(path).forEach((file) => {
+        const curPath = `${path}/${file}`;
+        if (fs.lstatSync(curPath).isDirectory()) {
+          removeFileOrFolder(curPath);
+        } else {
+          fs.unlinkSync(curPath);
+        }
+      });
+      fs.rmdirSync(path);
+    }
+  }
+}
 
 fs.readdirSync(path.join(__dirname, "../extensions"))
   .filter((filename) => {
@@ -22,5 +40,5 @@ fs.readdirSync(path.join(__dirname, "../extensions"))
   .forEach((filename) => {
     const extensionDir = path.join(__dirname, `../extensions/${filename}`);
     console.log(`Removing leftover artifacts from ${extensionDir}`);
-    rimraf(extensionDir);
+    removeFileOrFolder(extensionDir);
   });
