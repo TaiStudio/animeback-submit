@@ -11,7 +11,6 @@ const path = require("path");
 const fs = require("fs");
 const recursiveReadSync = require("recursive-readdir-sync");
 const imagemin = require("imagemin");
-const imageminPngquant = require("imagemin-pngquant");
 
 async function resize(file, size) {
   const newFile = file.replace(".png", `-${size}.png`);
@@ -29,7 +28,6 @@ async function resize(file, size) {
     .toFormat("png")
     .toBuffer()
     .then((buf) => imagemin.buffer(buf))
-    .then((buf) => imagemin.buffer(buf, { use: [imageminPngquant()] }))
     .then((buf) => fs.writeFileSync(newFile, buf));
 }
 
