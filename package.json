@@ -47,7 +47,7 @@
   "homepage": "https://github.com/TaiStudio/animeback-submit#readme",
   "dependencies": {
     "@octokit/rest": "^19.0.11",
-    "@taistudio/animeback-submit": "^1.34.0",
+    "@taistudio/animeback-submit": "^1.51.0",
     "asar": "^3.2.0",
     "bottleneck": "^2.19.5",
     "check-for-leaks": "^1.2.1",
@@ -73,7 +73,6 @@
     "pngjs": "^7.0.0",
     "prettier": "^2.8.8",
     "recursive-readdir-sync": "^1.0.6",
-    "request": "^2.88.2",
     "resolve-url": "^0.2.1",
     "rev-hash": "^4.0.0",
     "sharp": "^0.32.1",
