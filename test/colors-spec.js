@@ -14,7 +14,7 @@ const path = require("path");
 const sinon = require("sinon");
 
 const chai = require("chai");
-const Jimp = require("jimp");
+const { PNG } = require("pngjs");
 const tinyColor = require("tinycolor2");
 
 chai.should();
@@ -33,16 +33,27 @@ describe("colors", function () {
 
   beforeEach(async function () {
     slugsAndIconPaths = [];
-    // create a couple of test icons in a tmpdir
     testDir = fs.mkdtempSync(path.join(os.tmpdir(), "colors-spec-"));
+
     for (const colorName of colors) {
       const c = parseInt(tinyColor(colorName).toHex8(), 16);
-      const image = new Jimp(2, 2, c);
+      const png = new PNG({ width: 2, height: 2 });
+      for (let y = 0; y < png.height; y++) {
+        for (let x = 0; x < png.width; x++) {
+          const idx = (png.width * y + x) << 2;
+          png.data[idx] = (c >> 24) & 0xff;
+          png.data[idx + 1] = (c >> 16) & 0xff;
+          png.data[idx + 2] = (c >> 8) & 0xff;
+          png.data[idx + 3] = c & 0xff;
+        }
+      }
       const iconPath = path.join(testDir, colorName + ".png");
       await new Promise((resolve, reject) =>
-        image.write(iconPath, (err, buffer) =>
-          err ? reject(err) : resolve(buffer)
-        )
+        png
+          .pack()
+          .pipe(fs.createWriteStream(iconPath))
+          .on("finish", resolve)
+          .on("error", reject)
       );
       fs.chmodSync(iconPath, 511);
       slugsAndIconPaths.push({ slug: colorName, iconPath });
@@ -53,7 +64,6 @@ describe("colors", function () {
   });
 
   afterEach(() => {
-    // remove the temporaries that were created in before()
     for (const entry of fs.readdirSync(testDir)) {
       fs.unlinkSync(path.resolve(testDir, entry));
     }
@@ -64,7 +74,6 @@ describe("colors", function () {
   });
 
   it("should create entries with the expected properties", async () => {
-    // test input
     const entry = slugsAndIconPaths[0];
     const colors = await Colors.getColors([entry], {}, testDir);
     colors.should.have
@@ -94,7 +103,6 @@ describe("colors", function () {
       oldColors,
       testDir
     );
-    // newColors should be a superset of oldColors
     newColors.should.deep.contain(oldColors);
     oldColors.should.not.deep.contain(newColors);
     expect(consoleInfo.callCount).to.equal(2);
@@ -111,7 +119,6 @@ describe("colors", function () {
       oldColors,
       testDir
     );
-    // newColors should be a subset of oldColors
     newColors.should.not.deep.contain(oldColors);
     oldColors.should.deep.contain(newColors);
     expect(consoleInfo.callCount).to.equal(2);
@@ -129,7 +136,6 @@ describe("colors", function () {
     const goodEntry = slugsAndIconPaths[1];
     const input = [badEntry, goodEntry];
 
-    // make the first icon unreadable
     fs.unlinkSync(badEntry.iconPath);
 
     const colors = await Colors.getColors(input, {}, testDir);
@@ -172,12 +178,10 @@ describe("colors", function () {
     changedEntry.iconPath = unchangedEntry.iconPath;
     const newColors = await Colors.getColors(entries, oldColors, testDir);
 
-    // the revHash on the unchanged entry should be unchanged
     expect(newColors)
       .property(unchangedEntry.slug)
       .to.deep.contain(oldColors[unchangedEntry.slug]);
 
-    // the revHash on the changed entry should be different
     expect(newColors)
       .property(changedEntry.slug)
       .property("source")
