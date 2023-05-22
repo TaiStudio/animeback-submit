@@ -22,7 +22,7 @@ const oldReleaseData = require(outputFile);
 const output = {};
 const limiter = new Bottleneck({
   maxConcurrent: MAX_CONCURRENCY,
-})
+});
 
 const extensions = require("../lib/raw-extensions-list")();
 const extensionsWithRepos = require("../lib/extensions-with-github-repos");
@@ -43,22 +43,22 @@ extensionsWithRepos.forEach((extension) => {
     limiter
       .schedule(getLatestRelease, extension)
       .then((release) => {
-        console.log(`${extension.slug}: got latest release`)
+        console.log(`${extension.slug}: got latest release`);
         output[extension.slug] = {
           latestRelease: release.data,
           latestReleaseFetchedAt: new Date(),
-        }
+        };
       })
       .catch((err) => {
-        console.error(`${extension.slug}: no releases found`)
+        console.error(`${extension.slug}: no releases found`);
         output[extension.slug] = {
           latestRelease: null,
           latestReleaseFetchedAt: new Date(),
-        }
-        if (err.status !== 404) console.error(err)
-      })
+        };
+        if (err.status !== 404) console.error(err);
+      });
   } else {
-    output[extension.slug] = oldReleaseData[extension.slug]
+    output[extension.slug] = oldReleaseData[extension.slug];
   }
 });
 
@@ -67,7 +67,7 @@ limiter.on("idle", () => {
     fs.writeFileSync(outputFile, JSON.stringify(output, null, 2));
     console.log(`Done fetching release data.\nWrote ${outputFile}`);
     process.exit();
-}, 1000)
+  }, 1000);
 });
 
 function shouldUpdateextensionReleaseData(extension) {
@@ -78,14 +78,14 @@ function shouldUpdateextensionReleaseData(extension) {
 }
 
 function getLatestRelease(extension) {
-    const { user: owner, repo } = parseGitUrl(extension.repository)
-    const opts = {
-      owner: owner,
-      repo: repo,
-      headers: {
-        Accept: 'application/vnd.github.v3.html',
-      },
-    }
-  
-    return github.repos.getLatestRelease(opts)
+  const { user: owner, repo } = parseGitUrl(extension.repository);
+  const opts = {
+    owner: owner,
+    repo: repo,
+    headers: {
+      Accept: "application/vnd.github.v3.html",
+    },
+  };
+
+  return github.repos.getLatestRelease(opts);
 }
