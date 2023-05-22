@@ -1,207 +1,257 @@
+const categories = require("../lib/extensions-categories");
 const mocha = require("mocha");
 const describe = mocha.describe;
 const it = mocha.it;
 const fs = require("fs");
 const path = require("path");
-const extensions = require("..");
-const isHexColor = require("is-hexcolor");
-const categories = require("../categories");
 const expect = require("chai").expect;
-
-describe("machine-generated extension data (exported by the module)", () => {
-  it("is an array", () => {
-    expect(extensions).to.be.an("array");
+const isUrl = require("is-url");
+const { URL } = require("url");
+const cleanDeep = require("clean-deep");
+const imageSize = require("image-size");
+const makeColorAccessible = require("make-color-accessible");
+const slugg = require("slugg");
+const grandfatheredDescriptions = require("../lib/grandfathered-descriptions");
+const grandfatheredLinks = require("../lib/grandfathered-links.js");
+const grandfatheredSlugs = require("../lib/grandfathered-small-icons");
+const slugs = fs
+  .readdirSync(path.join(__dirname, "../extensions"))
+  .filter((filename) => {
+    return fs
+      .statSync(path.join(__dirname, `../extensions/${filename}`))
+      .isDirectory();
   });
 
-  it("has the same number of extensions as the extensions directory", () => {
-    const slugs = fs
-      .readdirSync(path.join(__dirname, "../extensions"))
-      .filter((filename) => {
-        return fs
-          .statSync(path.join(__dirname, `../extensions/${filename}`))
-          .isDirectory();
+describe("human-submitted extension data", () => {
+  slugs.forEach((slug) => {
+    describe(slug, () => {
+      const basedir = path.join(__dirname, `../extensions/${slug}`);
+      const jsonFile = `${slug}.json`;
+      const jsonPath = path.join(basedir, jsonFile);
+      const iconPath = path.join(basedir, `${slug}-icon.png`);
+
+      it("is in a directory whose name is lowercase with dashes as a delimiter", () => {
+        expect(slugg(slug)).to.equal(slug);
       });
 
-    expect(extensions.length).to.be.above(0);
-    expect(extensions.length).to.equal(slugs.length);
-  });
+      it(`includes a data file named ${slug}.json`, () => {
+        expect(fs.existsSync(jsonPath)).to.equal(true);
+      });
 
-  it("sets a `slug` property on every extension", () => {
-    expect(extensions.every((extension) => extension.slug.length > 0)).to.equal(
-      true
-    );
-  });
+      describe(`${jsonFile}`, () => {
+        const extension = require(jsonPath);
 
-  it("sets a multi-size icon properties on every extension", () => {
-    expect(
-      extensions.every((extension) => {
-        return (
-          extension.icon.endsWith(".png") &&
-          extension.icon32.endsWith("-icon-32.png") &&
-          extension.icon64.endsWith("-icon-64.png") &&
-          extension.icon128.endsWith("-icon-128.png") &&
-          extension.icon256.endsWith("-icon-256.png")
-        );
-      })
-    ).to.equal(true);
-  });
+        it("has a name", () => {
+          expect(extension.name.length).to.be.above(0);
+        });
 
-  it("sets a (git-based) YYYY-MM-DD `date` property on every extension", () => {
-    const datePattern = /\d{4}-\d{2}-\d{2}/;
+        describe("description", () => {
+          it("exists", () => {
+            expect(extension.description.length).to.be.above(0);
+          });
 
-    extensions.forEach((extension) => {
-      expect(datePattern.test(extension.date)).to.equal(
-        true,
-        `${extension.slug} does not have date property`
-      );
+          it("should not start with extension name", () => {
+            const extensionName = extension.name.toLowerCase();
+            const description = extension.description.toLowerCase();
+            expect(description).to.satisfy(
+              (desc) => !desc.startsWith(extensionName)
+            );
+          });
+
+          const descIsGrandfathered = grandfatheredDescriptions.includes(slug);
+          if (!descIsGrandfathered) {
+            it("should start with a capital letter", () => {
+              const firstLetter = extension.description[0];
+              expect(firstLetter).to.equal(firstLetter.toUpperCase());
+            });
+
+            it("should end with a period / full stop", () => {
+              expect(
+                extension.description[extension.description.length - 1]
+              ).to.equal(
+                ".",
+                `Description should end in a period / full stop: '${extension.description}'`
+              );
+            });
+
+            it("should not mention Electron since Electron is already implied", () => {
+              const description = extension.description.toLowerCase();
+              expect(description.indexOf("electron")).to.equal(
+                -1,
+                `Description should not mention Electron, as Electron is already implied: ${description}`
+              );
+            });
+
+            it('should not start description with "A" or "An"', () => {
+              const descriptionFirstWord = extension.description
+                .toLowerCase()
+                .split(" ", 1)[0];
+              const badStarts = ["a", "an"];
+              expect(badStarts).to.not.include(
+                descriptionFirstWord,
+                `Description should not start with 'A' or 'An': '${extension.description}'`
+              );
+            });
+          }
+        });
+
+        const linksAreGrandfathered = grandfatheredLinks.includes(slug);
+        if (!linksAreGrandfathered) {
+          // walk an object subtree looking for URLs
+          const getObjectUrls = (root) => {
+            const found = [];
+            const queue = [root];
+            while (queue.length !== 0) {
+              const vals = Object.values(queue.shift());
+              found.push(...vals.filter(isUrl).map((v) => new URL(v)));
+              queue.push(...vals.filter((v) => typeof v === "object"));
+            }
+            return found;
+          };
+
+          it("should use ssl links", () => {
+            const goodProtocols = ["https:", "sftp:"];
+            const urls = getObjectUrls(extension);
+
+            urls.forEach((url) =>
+              expect(url.protocol, url).to.be.oneOf(goodProtocols)
+            );
+          });
+        }
+
+        it("has a website with a valid URL (or no website)", () => {
+          expect(!extension.website || isUrl(extension.website)).to.equal(true);
+        });
+
+        it("has a valid repository URL (or no repository)", () => {
+          expect(!extension.repository || isUrl(extension.repository)).to.equal(
+            true
+          );
+        });
+
+        describe("keywords", () => {
+          it("should, if present, be an array of keywords", () => {
+            expect(extension.keywords || []).to.be.an("array");
+          });
+
+          it("should not include 'electron'", () => {
+            expect(
+              (extension.keywords || []).map((key) => key.toLocaleLowerCase())
+            ).to.not.include("electron");
+          });
+
+          it("should not include duplicates", () => {
+            const keywords = extension.keywords || [];
+            expect(keywords.sort().toString()).to.equal(
+              [...new Set(keywords).values()].sort().toString()
+            );
+          });
+        });
+
+        it("has a valid category", () => {
+          expect(extension.category.length).to.be.above(0);
+          expect(extension.category).to.be.oneOf(categories);
+        });
+
+        describe("colors", () => {
+          it(`allows goodColorOnWhite to be set, but it must be accessible`, () => {
+            // accessible: contrast ratio of 4.5:1 or greater (white background)
+            const color = extension.goodColorOnWhite;
+            if (color) {
+              const accessibleColor = makeColorAccessible(color);
+              expect(color === accessibleColor).to.equal(
+                true,
+                `${slug}: contrast ratio too low for goodColorOnWhite. Try: ${accessibleColor}`
+              );
+            }
+          });
+
+          it(`allows goodColorOnBlack to be set, but it must be accessible`, () => {
+            // accessible: contrast ratio of 4.5:1 or greater (black background)
+            const color = extension.goodColorOnBlack;
+            if (color) {
+              const accessibleColor = makeColorAccessible(color, {
+                background: "black",
+              });
+              expect(color === accessibleColor).to.equal(
+                true,
+                `${slug}: contrast ratio too low for goodColorOnBlack. Try: ${accessibleColor}`
+              );
+            }
+          });
+
+          it(`allows faintColorOnWhite to be set`, () => {
+            const color = extension.faintColorOnWhite;
+            if (color) {
+              expect(color).to.match(
+                /rgba\(\d+, \d+, \d+, /,
+                `${slug}'s faintColorOnWhite must be an rgba string`
+              );
+            }
+          });
+        });
+
+        it("has no empty properties", () => {
+          expect(cleanDeep(extension)).to.deep.equal(extension);
+        });
+
+        describe("screenshots", () => {
+          const screenshots = extension.screenshots || [];
+
+          it("requires imageUrl to be a fully-qualified HTTPS URL", () => {
+            screenshots.forEach((screenshot) => {
+              expect(
+                isUrl(screenshot.imageUrl) && /^https/.test(screenshot.imageUrl)
+              ).to.equal(
+                true,
+                `${extension.slug} screenshot imageUrl must be a fully-qualified HTTPS URL`
+              );
+            });
+          });
+
+          it("requires linkUrl to be a fully-qualified URL, if present", () => {
+            screenshots.forEach((screenshot) => {
+              expect(!screenshot.linkUrl || isUrl(screenshot.linkUrl)).to.equal(
+                true,
+                `${extension.slug} screenshot linkURL must be a fully qualified URL`
+              );
+            });
+          });
+        });
+
+        it("has a valid YouTube URL (or none)", () => {
+          expect(
+            !extension.youtube_video_url || isUrl(extension.youtube_video_url)
+          ).to.equal(true);
+        });
+      });
+
+      describe("icon", () => {
+        it(`exists as ${slug}-icon.png`, () => {
+          expect(fs.existsSync(iconPath)).to.equal(
+            true,
+            `${slug}-icon.png not found`
+          );
+        });
+
+        it("is a square", function () {
+          if (!fs.existsSync(iconPath)) return this.skip();
+
+          const dimensions = imageSize(iconPath);
+          expect(dimensions.width).to.be.a("number");
+          expect(dimensions.width).to.equal(dimensions.height);
+        });
+
+        const minPixels = grandfatheredSlugs.indexOf(slug) > -1 ? 128 : 256;
+        const maxPixels = 1024;
+
+        it(`is between ${minPixels}px x ${minPixels}px and ${maxPixels}px x ${maxPixels}px`, function () {
+          if (!fs.existsSync(iconPath)) return this.skip();
+          const dimensions = imageSize(iconPath);
+          expect(dimensions.width).to.be.within(minPixels, maxPixels);
+          expect(dimensions.height).to.be.within(minPixels, maxPixels);
+        });
+      });
     });
-  });
-
-  it("sets an `iconColors` array on every extension", () => {
-    extensions.forEach((extension) => {
-      expect(extension.iconColors).to.be.an("array", extension.slug);
-      expect(extension.iconColors.length).to.be.above(2, extension.slug);
-    });
-  });
-
-  it("sets a `colors.goodColorOnWhite` hex value on every extension", () => {
-    extensions.forEach((extension) => {
-      expect(isHexColor(extension.goodColorOnWhite)).to.eq(true);
-    });
-  });
-
-  it("sets a `colors.faintColorOnWhite` semi-transparent rgba value on every extension", () => {
-    extensions.forEach((extension) => {
-      expect(
-        extension.faintColorOnWhite,
-        `${extension.slug}'s faintColorOnWhite is not right`
-      ).to.match(/rgba\(\d+, \d+, \d+, /);
-    });
-  });
-
-  it("sets a `colors.goodColorOnBlack` hex value on every extension", () => {
-    extensions.forEach((extension) => {
-      expect(isHexColor(extension.goodColorOnBlack)).to.eq(true);
-    });
-  });
-
-  // it("does not override good colors if they already exist", () => {
-  //   const hyper = extensions.find((extension) => extension.slug === "hyper");
-  //   expect(hyper.goodColorOnWhite).to.eq("#000");
-  //   expect(hyper.goodColorOnBlack).to.eq("#FFF");
-  // });
-
-  describe("releases", () => {
-    const extensionsWithRepos = require("../lib/extensions-with-github-repos");
-    // const extensionsWithLatestRelease = extensions.filter(
-    //   (extension) => extension.latestRelease
-    // );
-
-    // it("tries to fetch a release for every extension with a GitHub repo", () => {
-    //   expect(
-    //     extensions.filter((extension) => extension.latestReleaseFetchedAt)
-    //       .length
-    //   ).to.equal(extensionsWithRepos.length);
-    // });
-
-    // it("collects latest GitHub release data for extensions that have it", () => {
-    //   expect(extensionsWithLatestRelease.length).to.be.above(0);
-    // });
-
-    it("sets `latestRelease` on extensions with GitHub repos that use Releases", () => {
-      expect(
-        extensionsWithLatestRelease.every(
-          (extension) => extension.latestRelease
-        )
-      ).to.eq(true);
-    });
-
-    it("sets `latestReleaseFetchedAt`", () => {
-      expect(
-        extensionsWithLatestRelease.every(
-          (extension) => extension.latestReleaseFetchedAt
-        )
-      ).to.eq(true);
-    });
-  });
-
-  describe("readmes", () => {
-    const readmeExtensions = extensions.filter(
-      (extension) => extension.readmeCleaned
-    );
-
-    // it("collects READMEs for extensions with GitHub repos", () => {
-    //   expect(readmeExtensions.length).to.be.above(0);
-    // });
-
-    it("sets `readmeCleaned`", () => {
-      expect(
-        readmeExtensions.every(
-          (extension) => extension.readmeCleaned.length > 0
-        )
-      ).to.eq(true);
-    });
-
-    it("sets `readmeOriginal`", () => {
-      expect(
-        readmeExtensions.every(
-          (extension) => extension.readmeOriginal.length > 0
-        )
-      ).to.eq(true);
-    });
-
-    it("sets `readmeFetchedAt`", () => {
-      expect(
-        readmeExtensions.every(
-          (extension) => extension.readmeFetchedAt.length > 0
-        )
-      ).to.eq(true);
-    });
-  });
-
-  // it("rewrites relative image source tags", () => {
-  //   const beaker = extensions.find(
-  //     (extension) => extension.slug === "beaker-browser"
-  //   );
-  //   const local = '<img src="build/icons/256x256.png"';
-  //   const remote =
-  //     '<img src="https://github.com/beakerbrowser/beaker/raw/master/build/icons/256x256.png"';
-
-  //   expect(beaker.readmeOriginal).to.include(local);
-  //   expect(beaker.readmeOriginal).to.not.include(remote);
-
-  //   expect(beaker.readmeCleaned).to.not.include(local);
-  //   expect(beaker.readmeCleaned).to.include(remote);
-  // });
-
-  //   it("rewrites relative link hrefs", () => {
-  //     const extension = extensions.find(
-  //       (extension) => extension.slug === "google-play-music-desktop-player"
-  //     );
-  //     const local = 'href="docs/PlaybackAPI.md"';
-  //     const remote =
-  //       'href="https://github.com/MarshallOfSound/Google-Play-Music-Desktop-Player-UNOFFICIAL-/blob/master/docs/PlaybackAPI.md"';
-
-  //     expect(extension.readmeOriginal).to.include(local);
-  //     expect(extension.readmeOriginal).to.not.include(remote);
-
-  //     expect(extension.readmeCleaned).to.not.include(local);
-  //     expect(extension.readmeCleaned).to.include(remote);
-  //   });
-});
-
-describe("machine-generated category data (exported by the module)", () => {
-  it("is an array", () => {
-    expect(categories).to.be.an("array");
-  });
-
-  it("sets a `slug` string on every category", () => {
-    expect(categories.every((category) => category.slug.length > 0)).to.equal(
-      true
-    );
-  });
-
-  it("sets a `count` number on every category", () => {
-    expect(categories.every((category) => category.count > 0)).to.equal(true);
   });
 });
