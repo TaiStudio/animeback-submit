@@ -33,7 +33,7 @@ async function resize(file, size) {
 
 async function main() {
   const icons = recursiveReadSync(path.join(__dirname, "../extensions")).filter(
-    (file) => file.match(/icon\.png/)
+    (file) => file.match(/icon\.png/),
   );
 
   console.log(`Resizing ${icons.length} icons...`);

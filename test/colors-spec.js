@@ -53,7 +53,7 @@ describe("colors", function () {
           .pack()
           .pipe(fs.createWriteStream(iconPath))
           .on("finish", resolve)
-          .on("error", reject)
+          .on("error", reject),
       );
       fs.chmodSync(iconPath, 511);
       slugsAndIconPaths.push({ slug: colorName, iconPath });
@@ -84,7 +84,7 @@ describe("colors", function () {
         "faintColorOnWhite",
         "goodColorOnBlack",
         "goodColorOnWhite",
-        "palette"
+        "palette",
       )
       .and.property("source")
       .has.all.keys("path", "revHash")
@@ -96,12 +96,12 @@ describe("colors", function () {
     const oldColors = await Colors.getColors(
       slugsAndIconPaths.slice(0, 1),
       {},
-      testDir
+      testDir,
     );
     const newColors = await Colors.getColors(
       slugsAndIconPaths.slice(0, 2),
       oldColors,
-      testDir
+      testDir,
     );
     newColors.should.deep.contain(oldColors);
     oldColors.should.not.deep.contain(newColors);
@@ -112,12 +112,12 @@ describe("colors", function () {
     const oldColors = await Colors.getColors(
       slugsAndIconPaths.slice(0, 2),
       {},
-      testDir
+      testDir,
     );
     const newColors = await Colors.getColors(
       slugsAndIconPaths.slice(0, 1),
       oldColors,
-      testDir
+      testDir,
     );
     newColors.should.not.deep.contain(oldColors);
     oldColors.should.deep.contain(newColors);
@@ -149,14 +149,14 @@ describe("colors", function () {
 
   it("should skip entries whose icons are unparsable", async () => {
     const entries = slugsAndIconPaths.map((original) =>
-      Object.create(original)
+      Object.create(original),
     );
     const badEntry = entries[0];
     const goodEntry = entries[1];
     badEntry.iconPath = path.join(testDir, "hello.png");
     fs.writeFileSync(
       badEntry.iconPath,
-      "This is a text file! The file suffix is wrong!\n"
+      "This is a text file! The file suffix is wrong!\n",
     );
 
     const colors = await Colors.getColors(entries, {}, testDir);

@@ -30,7 +30,7 @@ const possibleEnd =
 console.log(
   `Checking extensions ${possibleStart || 0} through ${
     possibleEnd || "infinity"
-  } for broken links`
+  } for broken links`,
 );
 
 findBrokenLinks(possibleStart, possibleEnd)

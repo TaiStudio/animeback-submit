@@ -8,7 +8,7 @@
 \-----------------------------------------------------------------------------------------------------------*/
 const MAX_CONCURRENCY = Number(process.env.MAX_CONCURRENCY) || 4; // simultaneous open web requests
 const README_CACHE_TTL = require("human-interval")(
-  process.env.README_CACHE_TTL || "4 hours"
+  process.env.README_CACHE_TTL || "4 hours",
 );
 
 const fs = require("fs");
@@ -35,10 +35,10 @@ const extensionsToUpdate = extensionsWithRepos.filter((extension) => {
 });
 
 console.log(
-  `${extensionsWithRepos.length} of ${extensions.length} extensions have a GitHub repo.`
+  `${extensionsWithRepos.length} of ${extensions.length} extensions have a GitHub repo.`,
 );
 console.log(
-  `${extensionsToUpdate.length} of those ${extensionsWithRepos.length} have missing or outdated README data.`
+  `${extensionsToUpdate.length} of those ${extensionsWithRepos.length} have missing or outdated README data.`,
 );
 
 extensionsToUpdate.forEach((extension) => {
@@ -111,12 +111,12 @@ function cleanReadme(readme, defaultBranch, extension) {
   const $relativeImages = $("img").not('[src^="http"]');
   if ($relativeImages.length) {
     console.log(
-      `${extension.slug}: updating ${$relativeImages.length} relative image URLs`
+      `${extension.slug}: updating ${$relativeImages.length} relative image URLs`,
     );
     $relativeImages.each((i, img) => {
       $(img).attr(
         "src",
-        `${extension.repository}/raw/${defaultBranch}/${$(img).attr("src")}`
+        `${extension.repository}/raw/${defaultBranch}/${$(img).attr("src")}`,
       );
     });
   }
@@ -124,12 +124,12 @@ function cleanReadme(readme, defaultBranch, extension) {
   const $relativeLinks = $("a").not('[href^="http"]');
   if ($relativeLinks.length) {
     console.log(
-      `${extension.slug}: updating ${$relativeLinks.length} relative links`
+      `${extension.slug}: updating ${$relativeLinks.length} relative links`,
     );
     $relativeLinks.each((i, link) => {
       $(link).attr(
         "href",
-        `${extension.repository}/blob/${defaultBranch}/${$(link).attr("href")}`
+        `${extension.repository}/blob/${defaultBranch}/${$(link).attr("href")}`,
       );
     });
   }

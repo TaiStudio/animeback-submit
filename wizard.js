@@ -108,7 +108,7 @@ inquirer
     createFile(
       jsonPath,
       `${JSON.stringify(extension)} \r\n`,
-      function (err) {}
+      function (err) {},
     );
     console.log();
     console.log(`Yay! Created ${path.relative(process.cwd(), jsonPath)}`);
@@ -116,11 +116,11 @@ inquirer
     console.log(
       `And add your extension files in ${path.relative(
         process.cwd(),
-        basepath
-      )}\n`
+        basepath,
+      )}\n`,
     );
     console.log(
-      `Once you're done, run \`npm test\` to verify. Then open your pull request!`
+      `Once you're done, run \`npm test\` to verify. Then open your pull request!`,
     );
     console.log();
   })

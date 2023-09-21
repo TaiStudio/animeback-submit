@@ -42,7 +42,7 @@ fs.readdirSync(path.join(__dirname, "../extensions"))
   })
   .filter((filename) => {
     return !fs.existsSync(
-      path.join(__dirname, `../extensions/${filename}/${filename}.json`)
+      path.join(__dirname, `../extensions/${filename}/${filename}.json`),
     );
   })
   .forEach((filename) => {

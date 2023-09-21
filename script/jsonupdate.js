@@ -154,18 +154,18 @@ function determineCategory(extension, jsonPath) {
     if (guessingKeywords) {
       extension.keywords = [matchedKeyword];
       console.log(
-        `SUCCESS ${extension.name} has been given ${extension.category} by guessing keyword: ${matchedKeyword}`
+        `SUCCESS ${extension.name} has been given ${extension.category} by guessing keyword: ${matchedKeyword}`,
       );
     } else {
       console.log(
-        `SUCCESS ${extension.name} has been given ${extension.category} by using keyword: ${matchedKeyword}`
+        `SUCCESS ${extension.name} has been given ${extension.category} by using keyword: ${matchedKeyword}`,
       );
     }
     savejson(extension, jsonPath);
   } else {
     if (guessingKeywords) {
       console.log(
-        `${extension.name} does not have keywords, its description is: ${extension.description}.`
+        `${extension.name} does not have keywords, its description is: ${extension.description}.`,
       );
     } else {
       console.log(
@@ -173,7 +173,7 @@ function determineCategory(extension, jsonPath) {
           extension.name
         }, keywords are: ${extension.keywords.join(",")}, description is: ${
           extension.description
-        }`
+        }`,
       );
     }
   }
@@ -215,5 +215,5 @@ tags.sort((a, b) => {
 
 console.log(`Used categories: ${JSON.stringify(usedCategories, null, 2)}`);
 console.log(
-  `Keywords unmapped to categories: ${JSON.stringify(tags, null, 2)}`
+  `Keywords unmapped to categories: ${JSON.stringify(tags, null, 2)}`,
 );

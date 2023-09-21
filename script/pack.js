@@ -38,7 +38,7 @@ fs.readdirSync(path.join(__dirname, "../extensions"))
         filename: `${slug}.asar`,
       },
       releases[slug],
-      readmes[slug]
+      readmes[slug],
     );
 
     extension.goodColorOnWhite =
@@ -64,5 +64,5 @@ fs.readdirSync(path.join(__dirname, "../extensions"))
 
 fs.writeFileSync(
   path.join(__dirname, "../index.json"),
-  JSON.stringify(extensions, null, 2)
+  JSON.stringify(extensions, null, 2),
 );

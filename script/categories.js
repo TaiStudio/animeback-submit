@@ -16,12 +16,12 @@ console.log("Generating a list of categories with counts...");
 
 const categories = countArrayValues(
   extensions.map((extension) => extension.category),
-  "name"
+  "name",
 )
   .map((category) => Object.assign(category, { slug: slugg(category.name) }))
   .sort((a, b) => b.count - a.count);
 
 fs.writeFileSync(
   path.join(__dirname, "../meta/categories.json"),
-  JSON.stringify(categories, null, 2)
+  JSON.stringify(categories, null, 2),
 );

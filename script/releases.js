@@ -8,7 +8,7 @@
 \-----------------------------------------------------------------------------------------------------------*/
 const MAX_CONCURRENCY = Number(process.env.MAX_CONCURRENCY) || 4; // simultaneous open web requests
 const RELEASE_CACHE_TTL = require("human-interval")(
-  process.env.RELEASE_CACHE_TTL || "4 hours"
+  process.env.RELEASE_CACHE_TTL || "4 hours",
 );
 
 const fs = require("fs");
@@ -28,14 +28,14 @@ const extensions = require("../lib/raw-extensions-list")();
 const extensionsWithRepos = require("../lib/extensions-with-github-repos");
 
 console.log(
-  `${extensionsWithRepos.length} of ${extensions.length} extensions have a GitHub repo.`
+  `${extensionsWithRepos.length} of ${extensions.length} extensions have a GitHub repo.`,
 );
 console.log(
   `${
     extensionsWithRepos.filter(shouldUpdateextensionReleaseData).length
   } of those ${
     extensionsWithRepos.length
-  } have missing or outdated release data.`
+  } have missing or outdated release data.`,
 );
 
 extensionsWithRepos.forEach((extension) => {

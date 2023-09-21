@@ -62,7 +62,7 @@ describe("human-submitted extension data", () => {
             const extensionName = extension.name.toLowerCase();
             const description = extension.description.toLowerCase();
             expect(description).to.satisfy(
-              (desc) => !desc.startsWith(extensionName)
+              (desc) => !desc.startsWith(extensionName),
             );
           });
 
@@ -75,10 +75,10 @@ describe("human-submitted extension data", () => {
 
             it("should end with a period / full stop", () => {
               expect(
-                extension.description[extension.description.length - 1]
+                extension.description[extension.description.length - 1],
               ).to.equal(
                 ".",
-                `Description should end in a period / full stop: '${extension.description}'`
+                `Description should end in a period / full stop: '${extension.description}'`,
               );
             });
 
@@ -86,7 +86,7 @@ describe("human-submitted extension data", () => {
               const description = extension.description.toLowerCase();
               expect(description.indexOf("electron")).to.equal(
                 -1,
-                `Description should not mention Electron, as Electron is already implied: ${description}`
+                `Description should not mention Electron, as Electron is already implied: ${description}`,
               );
             });
 
@@ -97,7 +97,7 @@ describe("human-submitted extension data", () => {
               const badStarts = ["a", "an"];
               expect(badStarts).to.not.include(
                 descriptionFirstWord,
-                `Description should not start with 'A' or 'An': '${extension.description}'`
+                `Description should not start with 'A' or 'An': '${extension.description}'`,
               );
             });
           }
@@ -122,7 +122,7 @@ describe("human-submitted extension data", () => {
             const urls = getObjectUrls(extension);
 
             urls.forEach((url) =>
-              expect(url.protocol, url).to.be.oneOf(goodProtocols)
+              expect(url.protocol, url).to.be.oneOf(goodProtocols),
             );
           });
         }
@@ -133,7 +133,7 @@ describe("human-submitted extension data", () => {
 
         it("has a valid repository URL (or no repository)", () => {
           expect(!extension.repository || isUrl(extension.repository)).to.equal(
-            true
+            true,
           );
         });
 
@@ -144,14 +144,14 @@ describe("human-submitted extension data", () => {
 
           it("should not include 'electron'", () => {
             expect(
-              (extension.keywords || []).map((key) => key.toLocaleLowerCase())
+              (extension.keywords || []).map((key) => key.toLocaleLowerCase()),
             ).to.not.include("electron");
           });
 
           it("should not include duplicates", () => {
             const keywords = extension.keywords || [];
             expect(keywords.sort().toString()).to.equal(
-              [...new Set(keywords).values()].sort().toString()
+              [...new Set(keywords).values()].sort().toString(),
             );
           });
         });
@@ -169,7 +169,7 @@ describe("human-submitted extension data", () => {
               const accessibleColor = makeColorAccessible(color);
               expect(color === accessibleColor).to.equal(
                 true,
-                `${slug}: contrast ratio too low for goodColorOnWhite. Try: ${accessibleColor}`
+                `${slug}: contrast ratio too low for goodColorOnWhite. Try: ${accessibleColor}`,
               );
             }
           });
@@ -183,7 +183,7 @@ describe("human-submitted extension data", () => {
               });
               expect(color === accessibleColor).to.equal(
                 true,
-                `${slug}: contrast ratio too low for goodColorOnBlack. Try: ${accessibleColor}`
+                `${slug}: contrast ratio too low for goodColorOnBlack. Try: ${accessibleColor}`,
               );
             }
           });
@@ -193,7 +193,7 @@ describe("human-submitted extension data", () => {
             if (color) {
               expect(color).to.match(
                 /rgba\(\d+, \d+, \d+, /,
-                `${slug}'s faintColorOnWhite must be an rgba string`
+                `${slug}'s faintColorOnWhite must be an rgba string`,
               );
             }
           });
@@ -209,10 +209,11 @@ describe("human-submitted extension data", () => {
           it("requires imageUrl to be a fully-qualified HTTPS URL", () => {
             screenshots.forEach((screenshot) => {
               expect(
-                isUrl(screenshot.imageUrl) && /^https/.test(screenshot.imageUrl)
+                isUrl(screenshot.imageUrl) &&
+                  /^https/.test(screenshot.imageUrl),
               ).to.equal(
                 true,
-                `${extension.slug} screenshot imageUrl must be a fully-qualified HTTPS URL`
+                `${extension.slug} screenshot imageUrl must be a fully-qualified HTTPS URL`,
               );
             });
           });
@@ -221,7 +222,7 @@ describe("human-submitted extension data", () => {
             screenshots.forEach((screenshot) => {
               expect(!screenshot.linkUrl || isUrl(screenshot.linkUrl)).to.equal(
                 true,
-                `${extension.slug} screenshot linkURL must be a fully qualified URL`
+                `${extension.slug} screenshot linkURL must be a fully qualified URL`,
               );
             });
           });
@@ -229,7 +230,7 @@ describe("human-submitted extension data", () => {
 
         it("has a valid YouTube URL (or none)", () => {
           expect(
-            !extension.youtube_video_url || isUrl(extension.youtube_video_url)
+            !extension.youtube_video_url || isUrl(extension.youtube_video_url),
           ).to.equal(true);
         });
       });
@@ -238,7 +239,7 @@ describe("human-submitted extension data", () => {
         it(`exists as ${slug}-icon.png`, () => {
           expect(fs.existsSync(iconPath)).to.equal(
             true,
-            `${slug}-icon.png not found`
+            `${slug}-icon.png not found`,
           );
         });
 

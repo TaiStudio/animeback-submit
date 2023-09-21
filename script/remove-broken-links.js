@@ -29,7 +29,7 @@ const possibleEnd =
 console.log(
   `Checking extensions ${possibleStart || 0} through ${
     possibleEnd || "infinity"
-  } for broken links`
+  } for broken links`,
 );
 
 function isRateLimited(failures = []) {
@@ -40,7 +40,7 @@ async function main() {
   const failArrays = (await findBrokenLinks(possibleStart, possibleEnd)).filter(
     (failure) => {
       return !isRateLimited(failure.result);
-    }
+    },
   );
 
   console.log(`Will disable ${failArrays.length} entries`);
