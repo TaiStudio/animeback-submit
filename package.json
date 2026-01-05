@@ -61,7 +61,7 @@
     "har-validator": "^5.1.5",
     "human-interval": "^2.0.1",
     "image-size": "^1.0.2",
-    "imagemin": "^7.0.1",
+    "imagemin": "^9.0.1",
     "inquirer": "^9.2.10",
     "is-hexcolor": "^1.0.0",
     "json-stable-stringify": "^1.0.1",
