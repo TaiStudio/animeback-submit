@@ -46,7 +46,7 @@
   },
   "homepage": "https://github.com/TaiStudio/animeback-submit#readme",
   "dependencies": {
-    "@octokit/rest": "^20.0.1",
+    "@octokit/rest": "^22.0.1",
     "@taistudio/animeback-submit": "^1.51.0",
     "asar": "^3.2.0",
     "bottleneck": "^2.19.5",
