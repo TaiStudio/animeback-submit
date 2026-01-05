@@ -60,7 +60,7 @@
     "github-url-to-object": "^4.0.6",
     "har-validator": "^5.1.5",
     "human-interval": "^2.0.1",
-    "image-size": "^1.0.2",
+    "image-size": "^2.0.2",
     "imagemin": "^9.0.1",
     "inquirer": "^13.1.0",
     "is-hexcolor": "^1.0.0",
