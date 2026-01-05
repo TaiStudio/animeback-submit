@@ -9,7 +9,7 @@ jobs:
     name: Github Package
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3.6.0
+      - uses: actions/checkout@v4.1.1
       - name: Chmod
         run: chmod +x ./script/release.sh
       - name: Update data and release
@@ -17,7 +17,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-      - uses: actions/setup-node@v3.8.1
+      - uses: actions/setup-node@v4.0.1
         with:
           node-version: '12'
           registry-url: 'https://npm.pkg.github.com'
