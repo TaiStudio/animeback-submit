@@ -96,8 +96,9 @@ const questions = [
   },
 ];
 
-inquirer
-  .prompt(questions)
+const prompt = inquirer.createPromptModule();
+
+prompt(questions)
   .then(function (answers) {
     const extension = cleanDeep(answers);
     const slug = slugify(extension.name);
@@ -108,7 +109,7 @@ inquirer
     createFile(
       jsonPath,
       `${JSON.stringify(extension)} \r\n`,
-      function (err) {},
+      function (err) { },
     );
     console.log();
     console.log(`Yay! Created ${path.relative(process.cwd(), jsonPath)}`);
