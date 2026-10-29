@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Chmod
-        run: chmod +x ./script/release.sh
+        run: chmod +x ./script/dump.sh
       - name: Dump
         run: npm run dump
         env:
