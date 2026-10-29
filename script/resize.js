@@ -27,7 +27,7 @@ async function resize(file, size) {
     .resize(size, size, { fit: "inside" })
     .toFormat("png")
     .toBuffer()
-    .then((buf) => imagemin.buffer(buf))
+    .then((buf) => imagemin.default.buffer(buf))
     .then((buf) => fs.writeFileSync(newFile, buf));
 }
 
