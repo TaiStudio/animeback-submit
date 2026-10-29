@@ -109,7 +109,7 @@ prompt(questions)
     createFile(
       jsonPath,
       `${JSON.stringify(extension)} \r\n`,
-      function (err) { },
+      function (err) {},
     );
     console.log();
     console.log(`Yay! Created ${path.relative(process.cwd(), jsonPath)}`);
