@@ -2,7 +2,7 @@
   "name": "getCPU",
   "description": "Get pourcent of your CPU.",
   "author": "Tai Studio",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "website": "https://taistudio.fr",
   "category": "Utilities",
   "keywords": ["tai", "studio", "get", "cpu"],
