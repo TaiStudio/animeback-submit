@@ -25,6 +25,7 @@
     "test-all": "mocha --reporter min && prettier --check \"./**/*.{ts,js,json,css}\" --write",
     "wizard": "node wizard.js",
     "release": "script/release.sh",
+    "dump": "script/dump.sh",
     "updater": "script/autoupdater.sh",
     "start": "node script/server.js"
   },
